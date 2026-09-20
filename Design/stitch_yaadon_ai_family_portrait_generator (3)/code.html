@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yaadon - Choose Occasion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#fbf9f8",
+                        "inverse-primary": "#ffb3b5",
+                        "surface-container-low": "#f6f3f2",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#ff828a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#40000b",
+                        "primary-fixed": "#ffdada",
+                        "inverse-on-surface": "#f3f0f0",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea5",
+                        "primary": "#570013",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed": "#261900",
+                        "surface-container": "#f0eded",
+                        "on-background": "#1b1c1c",
+                        "on-surface": "#1b1c1c",
+                        "surface-tint": "#af2b3e",
+                        "on-surface-variant": "#584141",
+                        "on-tertiary-container": "#a9a9a2",
+                        "tertiary-fixed": "#e4e3db",
+                        "on-secondary-container": "#785a1a",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "tertiary-fixed-dim": "#c8c7bf",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "inverse-surface": "#303030",
+                        "tertiary-container": "#3d3e39",
+                        "secondary-fixed-dim": "#e9c176",
+                        "outline-variant": "#e0bfbf",
+                        "surface-container-highest": "#e4e2e1",
+                        "surface-bright": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fed488",
+                        "on-tertiary-fixed": "#1b1c17",
+                        "secondary": "#775a19",
+                        "surface-variant": "#e4e2e1",
+                        "tertiary": "#272823",
+                        "primary-fixed-dim": "#ffb3b5",
+                        "surface-dim": "#dcd9d9",
+                        "primary-container": "#800020",
+                        "on-primary-fixed-variant": "#8e0f28",
+                        "outline": "#8c7071"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "8px",
+                        "container-padding-desktop": "40px",
+                        "section-margin": "64px",
+                        "container-padding-mobile": "20px",
+                        "stack-gap": "24px"
+                    },
+                    fontFamily: {
+                        "headline-sm": ["EB Garamond"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["EB Garamond"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["EB Garamond"],
+                        "display-lg-mobile": ["EB Garamond"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Soft, multi-layered natural shadow */
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(128, 0, 32, 0.04), 0 1px 4px rgba(128, 0, 32, 0.02);
+        }
+
+        /* Sticky button fade */
+        .bottom-fade {
+            background: linear-gradient(to top, rgba(251, 249, 248, 1) 0%, rgba(251, 249, 248, 0.9) 60%, rgba(251, 249, 248, 0) 100%);
+        }
+
+        /* Hide scrollbar for filter list */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative pb-[120px]">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 flat no shadows flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 max-w-7xl mx-auto z-40 sticky">
+<button aria-label="Go back" class="text-on-surface-variant hover:opacity-80 transition-opacity flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-inverse-primary">Yaadon</div>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center w-full max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop mt-4 md:mt-8">
+<!-- Progress Indicator (Step 3 of 3) -->
+<div class="w-full max-w-2xl flex flex-col items-center mb-10">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase tracking-wider">Step 3 of 3</div>
+<div class="flex items-center w-full max-w-[200px] justify-between">
+<div class="h-2 w-2 rounded-full bg-secondary-fixed-dim"></div>
+<div class="h-[1px] flex-grow bg-secondary-fixed-dim mx-2"></div>
+<div class="h-2 w-2 rounded-full bg-secondary-fixed-dim"></div>
+<div class="h-[1px] flex-grow bg-secondary-fixed-dim mx-2"></div>
+<div class="h-2 w-2 rounded-full bg-primary ring-4 ring-primary-fixed"></div>
+</div>
+</div>
+<!-- Header Section -->
+<div class="text-center w-full max-w-2xl mb-8">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Choose the perfect setting</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Select the moment and look you want to create.</p>
+</div>
+<!-- Filters (Scrollable on mobile) -->
+<div class="w-full mb-8 overflow-x-auto hide-scrollbar">
+<div class="flex gap-3 px-1 min-w-max">
+<button class="px-5 py-2.5 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md transition-colors whitespace-nowrap">Just Because</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant border border-outline-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md whitespace-nowrap">Birthday</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant border border-outline-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md whitespace-nowrap">Raksha Bandhan</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant border border-outline-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md whitespace-nowrap">Diwali</button>
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant border border-outline-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md whitespace-nowrap">Wedding Blessings</button>
+</div>
+</div>
+<!-- Gallery Grid (Bento/Card layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-gap w-full">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-3 card-shadow cursor-pointer border-2 border-transparent hover:border-primary-fixed transition-all group relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors z-10 rounded-[24px] pointer-events-none"></div>
+<div class="w-full aspect-[4/5] rounded-[16px] overflow-hidden bg-surface-variant relative mb-4">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed portrait of a modern Indian family in a traditional studio setting. The family is dressed in elegant, subtle ethnic wear. The background features a mottled, warm-toned studio backdrop reminiscent of classic portraiture. Soft, diffused professional lighting illuminates their faces, highlighting gentle smiles. The overall aesthetic is heritage-modern, with a sophisticated palette of deep maroons, cream, and soft gold accents, creating a calm, premium digital heirloom feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNnZLYqvqrgc2p0VOEjneQ8AuuihHSM-XefjC1NQX0xjWWPxoQ-TIJkEye-R2q12FF8s7R6qyQEFsvLO3nQIBFSlMI2wyQKFGFOC2V_Ng9efmUiZ5f9QJUuZydckG-2Pr9teQn0OWaccSYPwHIYNkj7I620vz_9VqjLVhYh61p-E6hW8j17QBV5iCwqRI-B-obMhS9eORYGDd90120XMft6rsBLqXeQcT8jfOWXNJ8cxjoWFpjd_PShQ"/>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Traditional Indian Studio</h3>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">Classic backdrop, formal attire</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-3 card-shadow cursor-pointer border-2 border-primary transition-all group relative overflow-hidden">
+<div class="absolute top-5 right-5 bg-primary text-on-primary rounded-full p-1 z-20">
+<span class="material-symbols-outlined text-[16px] block" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="absolute inset-0 bg-primary/5 z-10 rounded-[24px] pointer-events-none"></div>
+<div class="w-full aspect-[4/5] rounded-[16px] overflow-hidden bg-surface-variant relative mb-4">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed portrait of a modern Indian family relaxing in a warm, contemporary living room. The setting features subtle Indian decor elements like brass diyas and textured cushions. Sunlight streams through a window, casting a warm, golden-hour glow across the scene. The family is dressed in casual, comfortable clothing. The overall aesthetic is heritage-modern, emphasizing a quiet, premium digital heirloom feel with soft shadows and a palette of ivory, warm gold, and subtle earthy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLlIQltuBwV0Mk-HflREhMqRmQDOAlRqSrJtitY3xfD9pwnIPVdmkl1-tmPGw7X4s4XBaWYNMuRPcno9uFL5GYJ4i6hlLB8G32o4ybBxFjtgTtwe4SgTmC0Kt-jrpd821XueNxV8ZYI79GYYcWLH9t-OWTgJY6d9sppgGygQBreV_7PcizIQxlwMl6hSAGYTjyVEXjN1aCahnoYuPubhaOnkfqBDbP3-VZFAVjMff6jNFFvmhNuwv9Dw"/>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Warm Home Memory</h3>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">Cozy living room, natural light</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-3 card-shadow cursor-pointer border-2 border-transparent hover:border-primary-fixed transition-all group relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors z-10 rounded-[24px] pointer-events-none"></div>
+<div class="w-full aspect-[4/5] rounded-[16px] overflow-hidden bg-surface-variant relative mb-4">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed, majestic portrait of an Indian family styled as royalty. The setting resembles a heritage palace with intricate arched doorways and subtle floral motifs in the background. The family is dressed in rich, opulent traditional attire. Lighting is dramatic yet soft, creating a painterly effect with deep, ambient shadows. The overall aesthetic is heritage-modern, with a sophisticated palette featuring deep maroon, rich gold, and soft ivory, evoking a premium digital heirloom feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVxJCelJHxkqWe8hSTXU9BfHwBLK3lOg4W-OxzZhx5_eM7_IJPbiNz9ioxehFi2dDabYUVQtpq8lkpKEOWl4aCoYccq5v1MnTF2o-PKInoUU_tmSSYrIetG-VpIDHya6BsgXFQaBUeVyYEWBli-qBVYEdQrSHzch3BBKY1oLT7Nc8Zq9O0JjB6igJM_y-6ycRiV6Mwr_zqWa4Ld6H6M5XI8f6sa8CxbZWpzSS4rLLQLgBwZwa7N1MWOg"/>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Royal Indian Portrait</h3>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">Regal setting, rich colors</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-3 card-shadow cursor-pointer border-2 border-transparent hover:border-primary-fixed transition-all group relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors z-10 rounded-[24px] pointer-events-none"></div>
+<div class="w-full aspect-[4/5] rounded-[16px] overflow-hidden bg-surface-variant relative mb-4">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed portrait capturing an Indian family during a festive celebration. Subtle, soft-glowing lights or diyas are visible in the background, creating a joyful yet calm atmosphere. The family is wearing vibrant but muted festive clothing. The lighting is warm and celebratory, with soft bokeh effects. The overall aesthetic is heritage-modern, avoiding harsh colors for a sophisticated palette of soft golds, ivory, and deep reds, ensuring a premium, quiet digital heirloom feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJWSKWolSkpQvstMx7P7UDqrJvz4s7fi0ldyKzuZW4ZS99xWQM0CgLVcXBwEw2kiEZK3haws2ChoFGFYtcOTfT77_qeZt9o-OUkPbRxS99B-7S7D6azLzp4gDCv_M7MgP8bbqz-tnmztL2_J9yy0ZgF-2KqDJxMSG-sQfvBtFU8y0zApPSAZxjNElLHcxOTwlO1XyWhvwTauETByJhV_hbIov1mMrxU5Q304XfsfenI15Kp_p9CHqOVQ"/>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Festival Celebration</h3>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">Joyful, illuminated atmosphere</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-3 card-shadow cursor-pointer border-2 border-transparent hover:border-primary-fixed transition-all group relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors z-10 rounded-[24px] pointer-events-none"></div>
+<div class="w-full aspect-[4/5] rounded-[16px] overflow-hidden bg-surface-variant relative mb-4">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed portrait of an Indian family rendered in a beautiful, soft watercolour aesthetic. The edges of the image blend seamlessly into a textured, paper-like background. Colors are pastel and washed out, focusing on warm tones. The lighting feels ethereal and soft. The overall aesthetic is heritage-modern, prioritizing a tactile, paper-like feel to evoke nostalgia, utilizing a palette of soft ivory, pale gold, and muted rose for a premium digital heirloom experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIAA_Yx5tj8Wp8eOFcmu9Y0UvveNAtLEx7WCt4_W46BM6Yjo0gug7lPWxv8d4rFH15Ilks1_X3ZyDnJzvgc2h0xcqNyVqsdwKw6y-NIMTwkjGfe9VyO2Z9LpI4jkx8Klyp0JtlrI8ppi7vN7gbA2Xx0qpNYZ_NfyOZiuJWKLzEnK1-slAGXoCw2q_LCyhiL8h_WWgtoCRF_Lq-LOx5Kz5ZaJBUcR65HvviPxAFUFgBhlAIPs4pX08cOw"/>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Watercolour Keepsake</h3>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">Soft, painted artistic feel</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-3 card-shadow cursor-pointer border-2 border-transparent hover:border-primary-fixed transition-all group relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors z-10 rounded-[24px] pointer-events-none"></div>
+<div class="w-full aspect-[4/5] rounded-[16px] overflow-hidden bg-surface-variant relative mb-4">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed portrait of an Indian family styled as a vintage photograph. The image features a gentle sepia tone, soft grain, and subtle vignette edges to evoke the feeling of a physical photo album. The family is dressed timelessly. The lighting is soft and slightly faded. The overall aesthetic is heritage-modern, deeply emotional and nostalgic, utilizing a palette of warm browns, soft cream, and subtle gold undertones to create a premium digital heirloom." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmnnI4uTOKGfWonHIwa3Zg7sYRsB2UTvKSaR9tMxX-bj7z2_A82S_RGG8ORN0x-jUgkfKx5cDBzzIqb2VV31xn1Xqe8ZW4_ana3TXVV5-cB6rEUomm7vuYUreo8LkN6znhdKl3aLyfdoHzDKUoX4ljIHOf1lSMhKzAZ2YbeTlHBKlgioeyrMaUTI_7b3KqanwbAvPbmyuM4K4N0cKvZZ5jAm1Z1W-WpL37XgKhpOCosyEHoJ36DKBG1Q"/>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Vintage Photograph</h3>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">Sepia toned, nostalgic charm</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full z-50 bottom-fade pt-12 pb-6 px-container-padding-mobile md:px-container-padding-desktop flex justify-center pointer-events-none">
+<div class="w-full max-w-xl pointer-events-auto">
+<button class="w-full bg-primary hover:opacity-90 text-on-primary font-label-md text-label-md h-[56px] rounded-full flex items-center justify-center transition-all shadow-lg active:scale-[0.98]">
+<span>Review My Portrait</span>
+<span class="material-symbols-outlined ml-2 text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

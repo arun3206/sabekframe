@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yaadon - Upload Photos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=EB+Garamond:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#fbf9f8",
+                        "inverse-primary": "#ffb3b5",
+                        "surface-container-low": "#f6f3f2",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#ff828a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#40000b",
+                        "primary-fixed": "#ffdada",
+                        "inverse-on-surface": "#f3f0f0",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea5",
+                        "primary": "#570013",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed": "#261900",
+                        "surface-container": "#f0eded",
+                        "on-background": "#1b1c1c",
+                        "on-surface": "#1b1c1c",
+                        "surface-tint": "#af2b3e",
+                        "on-surface-variant": "#584141",
+                        "on-tertiary-container": "#a9a9a2",
+                        "tertiary-fixed": "#e4e3db",
+                        "on-secondary-container": "#785a1a",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "tertiary-fixed-dim": "#c8c7bf",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "inverse-surface": "#303030",
+                        "tertiary-container": "#3d3e39",
+                        "secondary-fixed-dim": "#e9c176",
+                        "outline-variant": "#e0bfbf",
+                        "surface-container-highest": "#e4e2e1",
+                        "surface-bright": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fed488",
+                        "on-tertiary-fixed": "#1b1c17",
+                        "secondary": "#775a19",
+                        "surface-variant": "#e4e2e1",
+                        "tertiary": "#272823",
+                        "primary-fixed-dim": "#ffb3b5",
+                        "surface-dim": "#dcd9d9",
+                        "primary-container": "#800020",
+                        "on-primary-fixed-variant": "#8e0f28",
+                        "outline": "#8c7071"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-padding-desktop": "40px",
+                        "section-margin": "64px",
+                        "container-padding-mobile": "20px",
+                        "stack-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["EB Garamond"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["EB Garamond"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["EB Garamond"],
+                        "display-lg-mobile": ["EB Garamond"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .ambient-shadow { box-shadow: 0 10px 40px -10px rgba(128, 0, 32, 0.05); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 bg-background dark:bg-background flat no shadows flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 max-w-7xl mx-auto z-50 sticky">
+<button aria-label="Go back" class="text-on-surface-variant hover:opacity-80 transition-opacity flex items-center justify-center p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-inverse-primary absolute left-1/2 -translate-x-1/2">Yaadon</div>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-2xl mx-auto px-container-padding-mobile md:px-0 py-8 pb-32">
+<!-- Step Indicator (Metaphor: Thread) -->
+<div class="flex items-center justify-center mb-8 px-8">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<div class="h-[1px] bg-secondary flex-grow mx-2"></div>
+<div class="w-4 h-4 rounded-full bg-primary flex items-center justify-center shadow-md">
+<div class="w-2 h-2 rounded-full bg-background"></div>
+</div>
+<div class="h-[1px] bg-outline-variant flex-grow mx-2"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+</div>
+<p class="text-center text-label-md font-label-md text-on-surface-variant mb-12 tracking-widest uppercase">Step 2 of 3</p>
+<!-- Header -->
+<div class="text-center mb-12">
+<h1 class="font-headline-md text-headline-md text-primary mb-3">Add your photographs</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Use one clear individual photo for each person.</p>
+</div>
+<!-- Upload Section Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-gap mb-12">
+<!-- Mother's Photo Upload Card (Error State Example) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 ambient-shadow border border-error-container relative flex flex-col items-center justify-center min-h-[300px] cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="absolute inset-0 rounded-xl overflow-hidden pointer-events-none opacity-5 group-hover:opacity-10 transition-opacity">
+<!-- Subtle texture or pattern could go here -->
+</div>
+<!-- Upload State Content -->
+<div class="flex flex-col items-center text-center z-10 w-full">
+<div class="w-16 h-16 rounded-full bg-error-container text-error flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="error">error</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-2">Upload Mother's Photo</h3>
+<!-- Error Message -->
+<div class="bg-error-container/50 text-on-error-container text-label-sm font-label-sm p-3 rounded-lg w-full mb-4">
+                        We could not clearly detect the face. Please choose another photo.
+                    </div>
+<div class="flex gap-4 w-full">
+<button class="flex-1 flex flex-col items-center justify-center py-3 bg-surface-container-high rounded-lg hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="photo_camera">photo_camera</span>
+<span class="text-label-sm font-label-sm text-on-surface">Camera</span>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center py-3 bg-surface-container-high rounded-lg hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="image">image</span>
+<span class="text-label-sm font-label-sm text-on-surface">Gallery</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Child's Photo Upload Card (Empty State) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 ambient-shadow border border-outline-variant relative flex flex-col items-center justify-center min-h-[300px] cursor-pointer hover:bg-surface-container transition-colors border-dashed group">
+<div class="flex flex-col items-center text-center z-10 w-full">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="person_add">person_add</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-6">Upload Child's Photo</h3>
+<div class="flex gap-4 w-full mt-auto">
+<button class="flex-1 flex flex-col items-center justify-center py-3 bg-surface-container-high rounded-lg hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="photo_camera">photo_camera</span>
+<span class="text-label-sm font-label-sm text-on-surface">Camera</span>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center py-3 bg-surface-container-high rounded-lg hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="image">image</span>
+<span class="text-label-sm font-label-sm text-on-surface">Gallery</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Guidelines Card -->
+<div class="bg-surface-container-highest rounded-xl p-6 mb-8 border border-outline-variant">
+<h4 class="font-label-md text-label-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="tips_and_updates">tips_and_updates</span>
+                For best results
+            </h4>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Clear, forward-facing view of the face.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Only one person per photo.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Good, even lighting (avoid harsh shadows).</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">No sunglasses or heavy facial obscurations.</span>
+</li>
+</ul>
+</div>
+</main>
+<!-- Sticky Bottom Action -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant p-4 px-container-padding-mobile shadow-[0_-10px_20px_-10px_rgba(128,0,32,0.1)] z-40">
+<div class="max-w-2xl mx-auto flex gap-4">
+<button class="flex-1 bg-surface-variant text-on-surface-variant font-label-md text-label-md py-4 rounded-full min-h-[56px] opacity-50 cursor-not-allowed transition-all">
+                Continue
+            </button>
+</div>
+</div>
+</body></html>

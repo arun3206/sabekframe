@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yaadon - Choose Relationship</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=EB+Garamond:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#fbf9f8",
+                      "inverse-primary": "#ffb3b5",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-fixed-variant": "#474742",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#ff828a",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#40000b",
+                      "primary-fixed": "#ffdada",
+                      "inverse-on-surface": "#f3f0f0",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#ffdea5",
+                      "primary": "#570013",
+                      "surface-container-high": "#eae8e7",
+                      "on-secondary-fixed": "#261900",
+                      "surface-container": "#f0eded",
+                      "on-background": "#1b1c1c",
+                      "on-surface": "#1b1c1c",
+                      "surface-tint": "#af2b3e",
+                      "on-surface-variant": "#584141",
+                      "on-tertiary-container": "#a9a9a2",
+                      "tertiary-fixed": "#e4e3db",
+                      "on-secondary-container": "#785a1a",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "tertiary-fixed-dim": "#c8c7bf",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface": "#fbf9f8",
+                      "inverse-surface": "#303030",
+                      "tertiary-container": "#3d3e39",
+                      "secondary-fixed-dim": "#e9c176",
+                      "outline-variant": "#e0bfbf",
+                      "surface-container-highest": "#e4e2e1",
+                      "surface-bright": "#fbf9f8",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#fed488",
+                      "on-tertiary-fixed": "#1b1c17",
+                      "secondary": "#775a19",
+                      "surface-variant": "#e4e2e1",
+                      "tertiary": "#272823",
+                      "primary-fixed-dim": "#ffb3b5",
+                      "surface-dim": "#dcd9d9",
+                      "primary-container": "#800020",
+                      "on-primary-fixed-variant": "#8e0f28",
+                      "outline": "#8c7071"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px",
+                      "2xl": "1.5rem",
+                      "3xl": "2rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "container-padding-desktop": "40px",
+                      "section-margin": "64px",
+                      "container-padding-mobile": "20px",
+                      "stack-gap": "24px"
+              },
+              "fontFamily": {
+                      "headline-sm": [
+                              "EB Garamond"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "EB Garamond"
+                      ],
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "EB Garamond"
+                      ],
+                      "display-lg-mobile": [
+                              "EB Garamond"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .arch-mask {
+            mask-image: radial-gradient(ellipse at 50% 0%, black 50%, transparent 50%), linear-gradient(black, black);
+            mask-size: 100% 100px, 100% calc(100% - 50px);
+            mask-position: 0 0, 0 50px;
+            mask-repeat: no-repeat;
+            -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 50%, transparent 50%), linear-gradient(black, black);
+            -webkit-mask-size: 100% 100px, 100% calc(100% - 50px);
+            -webkit-mask-position: 0 0, 0 50px;
+            -webkit-mask-repeat: no-repeat;
+            border-top-left-radius: 50% 100px;
+            border-top-right-radius: 50% 100px;
+        }
+
+        .card-selected {
+            border: 2px solid #800020; /* primary-container */
+            box-shadow: 0 8px 32px rgba(128, 0, 32, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .card-selected .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card-unselected .check-icon {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .transition-all-200 {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 flat no shadows flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 max-w-7xl mx-auto z-50 sticky">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-primary dark:text-inverse-primary">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-inverse-primary text-center flex-1">Yaadon</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex-1 w-full max-w-5xl mx-auto px-container-padding-mobile md:px-container-padding-desktop pt-8 pb-32">
+<!-- Progress Indicator -->
+<div class="flex flex-col items-center mb-8">
+<div class="text-label-md font-label-md text-on-surface-variant mb-2 uppercase tracking-widest">Step 1 of 3</div>
+<div class="flex items-center gap-2">
+<div class="w-12 h-1 bg-primary-container rounded-full"></div>
+<div class="w-12 h-1 bg-surface-container-high rounded-full"></div>
+<div class="w-12 h-1 bg-surface-container-high rounded-full"></div>
+</div>
+</div>
+<!-- Header Content -->
+<div class="text-center mb-12 max-w-2xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Who would you like to bring together?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose a relationship so we can personalise your portrait.</p>
+</div>
+<!-- Relationship Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto" id="relationship-grid">
+<!-- Card: Mother & Child -->
+<button class="group relative bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_8px_40px_0_rgba(128,0,32,0.04)] hover:shadow-[0_12px_40px_0_rgba(128,0,32,0.08)] transition-all-200 border-2 border-transparent text-left w-full card-unselected" data-relationship="mother-child" onclick="selectCard(this)">
+<div class="absolute top-4 right-4 z-10 w-8 h-8 bg-primary-container rounded-full flex items-center justify-center check-icon transition-all-200">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="aspect-[4/5] w-full p-2">
+<div class="w-full h-full arch-mask relative overflow-hidden bg-surface-container-low">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A warm, emotionally resonant portrait of an Indian mother and young child laughing together. Soft, natural sunlight filtering through a sheer curtain creates a gentle, golden-hour glow. The mother wears a subtle maroon sari, and the setting suggests a comforting, traditional yet modern home environment. High quality, soft focus background, minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJFgZ-vbCNvWZt-s_lEnVlYSJl6Xk-qMdI7Jmi76HyWZCesZ7Ob9AU9pEYyoinK2bdOZn8N8PzdKJfT_iaykXu0wFtiJPkGIwx9k1hVwzIfMEvRRX2n0NpRa4BPWpQfyjGXP4hQzqeV3xnoYM2fh5NOVwh_Q9-ztilBJavqi1DNVgHyCe6SJiRJAFlOFLQjrEi7cf9RHp_4N_32SrWhZ3KjzT-WICKvxtMxbZwffDDFvBXSPRUifpIPw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</div>
+<div class="p-6 text-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Mother &amp; Child</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">A bond of endless warmth</p>
+</div>
+</button>
+<!-- Card: Father & Child -->
+<button class="group relative bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_8px_40px_0_rgba(128,0,32,0.04)] hover:shadow-[0_12px_40px_0_rgba(128,0,32,0.08)] transition-all-200 border-2 border-transparent text-left w-full card-unselected" data-relationship="father-child" onclick="selectCard(this)">
+<div class="absolute top-4 right-4 z-10 w-8 h-8 bg-primary-container rounded-full flex items-center justify-center check-icon transition-all-200">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="aspect-[4/5] w-full p-2">
+<div class="w-full h-full arch-mask relative overflow-hidden bg-surface-container-low">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A tender, high-quality portrait of an Indian father holding his child. The father wears a simple, elegant kurta. The lighting is soft and warm, casting gentle shadows that highlight their expressions of love and security. The background is a clean, modern-heritage interior with subtle earthy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsQConisdUBESs3nMpwkjSMNKgR5OErt4jqBxAnlqYPMNmlCxHPFLAiQ44uHlRCgONVOBLYukpitUvQE98i8xmpk6s6dcCad92mErxCPz7_uQ5VGDg1mjF-2WMJ_499FifAWn1cDgrZShz-zR7FfMQLSKTnKW0MGbpwWgmMfOV95QHYD_fwt2N4PYFbCGaqxHxQNyp03mDOb-af5m0ToyuwEe85txU5lQXZJqe00QsTp5fZ2ozfmQqCw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</div>
+<div class="p-6 text-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Father &amp; Child</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Strength and guidance</p>
+</div>
+</button>
+<!-- Card: Grandparent & Grandchild -->
+<button class="group relative bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_8px_40px_0_rgba(128,0,32,0.04)] hover:shadow-[0_12px_40px_0_rgba(128,0,32,0.08)] transition-all-200 border-2 border-transparent text-left w-full card-unselected" data-relationship="grandparent-child" onclick="selectCard(this)">
+<div class="absolute top-4 right-4 z-10 w-8 h-8 bg-primary-container rounded-full flex items-center justify-center check-icon transition-all-200">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="aspect-[4/5] w-full p-2">
+<div class="w-full h-full arch-mask relative overflow-hidden bg-surface-container-low">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A deeply nostalgic and heartwarming portrait of an elderly Indian grandparent sharing a story with their grandchild. Soft, diffused lighting emphasizes the wrinkles of wisdom and the bright eyes of youth. The color palette is muted with hints of deep maroon and ivory. Minimalist, premium heirloom photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBA6l5b0OMI3mqAEgtYAWWArGGSv0HSEADlOzR1BrR06fm-Ch4GuTpo1e2ut0Q3D4uWY3xZ0fUBoGgxlFZtbU8DVI5x9CsE5s_dDdPlge-Rl081l-Mu6v551MwNg-KIamrjjUDXuThBNNJM7IqDQ9A8wwzN79qXZbyobJqvfUtogYkMcx005XDQm-Bc3aDcyL1UlmM_ZX2RD5KEcpbJmimQRNaaRPr9TEWehTxOapoD56poMylVAwS7Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</div>
+<div class="p-6 text-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Grandparent &amp; Child</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Generations of stories</p>
+</div>
+</button>
+<!-- Card: Brother & Sister -->
+<button class="group relative bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_8px_40px_0_rgba(128,0,32,0.04)] hover:shadow-[0_12px_40px_0_rgba(128,0,32,0.08)] transition-all-200 border-2 border-transparent text-left w-full card-unselected" data-relationship="siblings" onclick="selectCard(this)">
+<div class="absolute top-4 right-4 z-10 w-8 h-8 bg-primary-container rounded-full flex items-center justify-center check-icon transition-all-200">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="aspect-[4/5] w-full p-2">
+<div class="w-full h-full arch-mask relative overflow-hidden bg-surface-container-low">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A joyful, premium lifestyle portrait of an Indian brother and sister in traditional attire, sharing a candid moment of laughter. The aesthetic is clean and modern, avoiding cluttered festive backgrounds. Warm lighting, tactile textures, and a sophisticated color palette of subtle golds and deep reds." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrBNRVWNn-iiWBLDbzBCeRhYamPUcdOlW7vqGN88M6P31sI8XZG1YJ_66DyH7cIoNRMRDY_7kU1QkQ3ZqTarlD4_CjiYQ4so-HolGECoVLOzV2OvlZYPWNvzwcV_2-h9BdrWT--seJqpP6ULC-dB2Xtqipt1QQdATT_yoVmwbqe0e3JfY_9UeruKwz3z-L3tXMmNEwiwT3ZcZjAoUkV-jtTGpJhZRBp3zxxzrhi7-vRB98_Zk_76PLtA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+</div>
+<div class="p-6 text-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Brother &amp; Sister</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">A lifetime of shared secrets</p>
+</div>
+</button>
+</div>
+</main>
+<!-- Sticky Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest/90 backdrop-blur-md border-t border-surface-container py-4 px-container-padding-mobile md:px-container-padding-desktop z-40">
+<div class="max-w-4xl mx-auto flex justify-end">
+<button class="bg-surface-variant text-on-surface-variant font-label-md text-label-md py-4 px-8 rounded-full min-h-[56px] min-w-[200px] flex items-center justify-center gap-2 transition-all duration-300 opacity-50 cursor-not-allowed" disabled="" id="continue-btn">
+<span>Continue</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<script>
+        function selectCard(clickedCard) {
+            const allCards = document.querySelectorAll('#relationship-grid > button');
+            const continueBtn = document.getElementById('continue-btn');
+
+            // Deselect all
+            allCards.forEach(card => {
+                card.classList.remove('card-selected');
+                card.classList.add('card-unselected');
+            });
+
+            // Select clicked
+            clickedCard.classList.remove('card-unselected');
+            clickedCard.classList.add('card-selected');
+
+            // Enable Continue button
+            continueBtn.disabled = false;
+            continueBtn.classList.remove('bg-surface-variant', 'text-on-surface-variant', 'opacity-50', 'cursor-not-allowed');
+            continueBtn.classList.add('bg-primary-container', 'text-on-primary-container', 'hover:bg-primary', 'hover:text-on-primary', 'shadow-md', 'hover:shadow-lg', 'cursor-pointer');
+            continueBtn.style.transform = 'scale(1.02)';
+            setTimeout(() => continueBtn.style.transform = 'scale(1)', 150);
+        }
+    </script>
+</body></html>

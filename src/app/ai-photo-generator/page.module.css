@@ -1,0 +1,510 @@
+.shell {
+  --ck-ink: #331b22;
+  --ck-muted: #6c6262;
+  --ck-purple: #800020;
+  --ck-purple-dark: #570013;
+  --ck-coral: #9b1734;
+  --ck-yellow: #c5a059;
+  --ck-line: #e4d7c4;
+  min-height: 100vh;
+  overflow: clip;
+  background: #fffdf5;
+  color: var(--ck-ink);
+}
+
+.hero {
+  overflow: hidden;
+  padding: 3.4rem 1rem 4rem;
+  background:
+    radial-gradient(circle at 8% 8%, rgb(255 216 100 / 58%), transparent 29%),
+    radial-gradient(circle at 94% 35%, rgb(191 233 210 / 72%), transparent 31%),
+    linear-gradient(145deg, #fff9ed, #f5e9ff 72%);
+}
+
+.heroInner,
+.section {
+  width: min(100%, 70rem);
+  margin-inline: auto;
+}
+
+.heroInner {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--ck-purple);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 13ch;
+  margin: 0.8rem auto 1rem;
+  color: var(--ck-ink);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: clamp(2.55rem, 12vw, 5rem);
+  font-weight: 950;
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+}
+
+.lead {
+  max-width: 39rem;
+  margin: 0 auto;
+  color: var(--ck-muted);
+  font-size: clamp(1rem, 3.8vw, 1.18rem);
+}
+
+.heroActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-width: 27rem;
+  margin: 1.6rem auto 0;
+}
+
+.primaryCta,
+.secondaryCta {
+  min-height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.primaryCta {
+  background: linear-gradient(135deg, var(--ck-coral), #d82b62);
+  color: white;
+  box-shadow: 0 14px 30px rgb(216 43 98 / 24%);
+}
+
+.secondaryCta {
+  border: 1px solid var(--ck-line);
+  background: rgb(255 255 255 / 80%);
+  color: var(--ck-purple-dark);
+}
+
+.primaryCta:hover,
+.secondaryCta:hover {
+  transform: translateY(-1px);
+}
+
+.primaryCta:focus-visible,
+.secondaryCta:focus-visible,
+.styleCopy a:focus-visible,
+.faqList summary:focus-visible {
+  outline: 3px solid var(--ck-yellow);
+  outline-offset: 3px;
+}
+
+.trustList {
+  display: grid;
+  gap: 0.55rem;
+  width: fit-content;
+  margin: 1.35rem auto 0;
+  padding: 0;
+  color: var(--ck-muted);
+  font-size: 0.8rem;
+  list-style: none;
+  text-align: left;
+}
+
+.trustList li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.trustList svg,
+.photoGuide svg {
+  color: #16804a;
+}
+
+.heroGallery {
+  position: relative;
+  min-height: 25rem;
+}
+
+.heroGallery figure {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  border: 0.45rem solid white;
+  border-radius: 1.35rem;
+  background: #eaddef;
+  box-shadow: 0 24px 50px rgb(65 28 82 / 22%);
+}
+
+.heroGallery img,
+.styleImage img {
+  object-fit: cover;
+}
+
+.heroPortrait1 {
+  z-index: 3;
+  inset: 0 auto auto 50%;
+  width: min(64vw, 17rem);
+  aspect-ratio: 3 / 4;
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.heroPortrait2,
+.heroPortrait3 {
+  width: min(42vw, 11.5rem);
+  aspect-ratio: 3 / 4;
+}
+
+.heroPortrait2 {
+  z-index: 2;
+  bottom: 0;
+  left: 2%;
+  transform: rotate(-8deg);
+}
+
+.heroPortrait3 {
+  right: 2%;
+  bottom: 0.6rem;
+  transform: rotate(9deg);
+}
+
+.benefitStrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block: 1px solid var(--ck-line);
+  background: white;
+}
+
+.benefitStrip div {
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem;
+  color: var(--ck-ink);
+  font-size: 0.75rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+.benefitStrip svg {
+  width: 1.2rem;
+  flex: 0 0 auto;
+  color: var(--ck-purple);
+}
+
+.section {
+  padding: 4.5rem 1rem;
+  scroll-margin-top: 1rem;
+}
+
+.sectionHeading {
+  max-width: 44rem;
+  margin-bottom: 2rem;
+}
+
+.sectionHeading h2,
+.photoGuide h2,
+.finalCta h2 {
+  margin: 0.45rem 0 0.75rem;
+  color: var(--ck-ink);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: clamp(2rem, 8vw, 3.35rem);
+  font-weight: 950;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.sectionHeading > p:last-child,
+.photoGuide p,
+.finalCta > p:not(.eyebrow) {
+  margin: 0;
+  color: var(--ck-muted);
+}
+
+.styleGrid {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.styleCard {
+  overflow: hidden;
+  border: 1px solid var(--ck-line);
+  border-radius: 1.35rem;
+  background: white;
+  box-shadow: 0 16px 38px rgb(71 31 91 / 9%);
+}
+
+.styleImage {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #eee3f3;
+}
+
+.styleCopy {
+  padding: 1.1rem;
+}
+
+.styleCopy h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 950;
+}
+
+.styleCopy p {
+  margin: 0.35rem 0 0.8rem;
+  color: var(--ck-muted);
+  font-size: 0.86rem;
+}
+
+.styleCopy a {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ck-purple);
+  font-weight: 900;
+  text-underline-offset: 0.2rem;
+}
+
+.howSection {
+  width: auto;
+  max-width: none;
+  padding-inline: max(1rem, calc((100% - 70rem) / 2));
+  background: linear-gradient(145deg, #faf0ff, #fff9ed);
+}
+
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  display: flex;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid var(--ck-line);
+  border-radius: 1rem;
+  background: white;
+}
+
+.steps > li > span {
+  width: 2.35rem;
+  height: 2.35rem;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ck-purple);
+  color: white;
+  font-weight: 950;
+}
+
+.steps h3,
+.steps p {
+  margin: 0;
+}
+
+.steps h3 {
+  font-size: 1.05rem;
+  font-weight: 950;
+}
+
+.steps p {
+  margin-top: 0.35rem;
+  color: var(--ck-muted);
+  font-size: 0.88rem;
+}
+
+.photoGuide {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--ck-purple-dark);
+  color: white;
+  box-shadow: 0 22px 50px rgb(79 20 121 / 18%);
+}
+
+.photoGuide .eyebrow,
+.photoGuide h2,
+.photoGuide p {
+  color: white;
+}
+
+.photoGuide ul {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photoGuide li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 800;
+}
+
+.photoGuide li svg {
+  flex: 0 0 auto;
+  color: var(--ck-yellow);
+}
+
+.faqSection {
+  padding-top: 2rem;
+}
+
+.faqList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.faqList details {
+  border: 1px solid var(--ck-line);
+  border-radius: 1rem;
+  background: white;
+}
+
+.faqList summary {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  font-weight: 900;
+  list-style: none;
+}
+
+.faqList summary::after {
+  content: "+";
+  color: var(--ck-purple);
+  font-size: 1.5rem;
+}
+
+.faqList details[open] summary::after {
+  content: "−";
+}
+
+.faqList details p {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: var(--ck-muted);
+}
+
+.finalCta {
+  width: min(calc(100% - 2rem), 70rem);
+  margin: 0 auto 5rem;
+  padding: 2.7rem 1.2rem;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 8% 0%, rgb(255 216 100 / 72%), transparent 34%),
+    linear-gradient(135deg, #f8e9ff, #fff4d8);
+  text-align: center;
+}
+
+.finalCta h2 {
+  max-width: 20ch;
+  margin-inline: auto;
+}
+
+.finalCta .primaryCta {
+  width: min(100%, 27rem);
+  margin-top: 1.4rem;
+}
+
+@media (min-width: 640px) {
+  .heroActions {
+    flex-direction: row;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .benefitStrip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .styleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photoGuide {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    padding: 2.3rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding-block: 5rem;
+  }
+
+  .heroInner {
+    grid-template-columns: 1fr 0.95fr;
+  }
+
+  .heroCopy {
+    text-align: left;
+  }
+
+  .hero h1,
+  .lead,
+  .heroActions,
+  .trustList {
+    margin-left: 0;
+  }
+
+  .heroActions {
+    justify-content: flex-start;
+  }
+
+  .heroGallery {
+    min-height: 31rem;
+  }
+
+  .heroPortrait1 {
+    width: 19rem;
+  }
+
+  .heroPortrait2,
+  .heroPortrait3 {
+    width: 13rem;
+  }
+
+  .styleGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryCta,
+  .secondaryCta {
+    transition: none;
+  }
+}

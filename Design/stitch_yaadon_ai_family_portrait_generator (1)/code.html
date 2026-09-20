@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yaadon - Create Family Memories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=EB+Garamond:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "background": "#fbf9f8",
+                            "inverse-primary": "#ffb3b5",
+                            "surface-container-low": "#f6f3f2",
+                            "on-tertiary-fixed-variant": "#474742",
+                            "on-secondary": "#ffffff",
+                            "on-primary-container": "#ff828a",
+                            "on-tertiary": "#ffffff",
+                            "on-primary-fixed": "#40000b",
+                            "primary-fixed": "#ffdada",
+                            "inverse-on-surface": "#f3f0f0",
+                            "error-container": "#ffdad6",
+                            "secondary-fixed": "#ffdea5",
+                            "primary": "#570013",
+                            "surface-container-high": "#eae8e7",
+                            "on-secondary-fixed": "#261900",
+                            "surface-container": "#f0eded",
+                            "on-background": "#1b1c1c",
+                            "on-surface": "#1b1c1c",
+                            "surface-tint": "#af2b3e",
+                            "on-surface-variant": "#584141",
+                            "on-tertiary-container": "#a9a9a2",
+                            "tertiary-fixed": "#e4e3db",
+                            "on-secondary-container": "#785a1a",
+                            "on-error-container": "#93000a",
+                            "error": "#ba1a1a",
+                            "on-secondary-fixed-variant": "#5d4201",
+                            "tertiary-fixed-dim": "#c8c7bf",
+                            "on-error": "#ffffff",
+                            "on-primary": "#ffffff",
+                            "surface": "#fbf9f8",
+                            "inverse-surface": "#303030",
+                            "tertiary-container": "#3d3e39",
+                            "secondary-fixed-dim": "#e9c176",
+                            "outline-variant": "#e0bfbf",
+                            "surface-container-highest": "#e4e2e1",
+                            "surface-bright": "#fbf9f8",
+                            "surface-container-lowest": "#ffffff",
+                            "secondary-container": "#fed488",
+                            "on-tertiary-fixed": "#1b1c17",
+                            "secondary": "#775a19",
+                            "surface-variant": "#e4e2e1",
+                            "tertiary": "#272823",
+                            "primary-fixed-dim": "#ffb3b5",
+                            "surface-dim": "#dcd9d9",
+                            "primary-container": "#800020",
+                            "on-primary-fixed-variant": "#8e0f28",
+                            "outline": "#8c7071"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "base": "8px",
+                            "container-padding-desktop": "40px",
+                            "section-margin": "64px",
+                            "container-padding-mobile": "20px",
+                            "stack-gap": "24px"
+                    },
+                    "fontFamily": {
+                            "headline-sm": ["EB Garamond"],
+                            "label-md": ["Plus Jakarta Sans"],
+                            "headline-md": ["EB Garamond"],
+                            "label-sm": ["Plus Jakarta Sans"],
+                            "display-lg": ["EB Garamond"],
+                            "display-lg-mobile": ["EB Garamond"],
+                            "body-lg": ["Plus Jakarta Sans"],
+                            "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                            "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                            "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
+                            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        .text-balance {
+            text-wrap: balance;
+        }
+        /* Soft Ambient Shadows */
+        .shadow-ambient {
+            box-shadow: 0 4px 40px rgba(128, 0, 32, 0.05);
+        }
+        .shadow-ambient-lg {
+            box-shadow: 0 12px 60px rgba(128, 0, 32, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 flat no shadows flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 max-w-7xl mx-auto sticky z-50">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary mr-2 cursor-pointer hover:opacity-80 transition-opacity" data-icon="arrow_back" data-weight="linear">arrow_back</span>
+<img alt="Yaadon Logo" class="h-8 md:h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSOeLWPobESzbFXD1yb_m5PeoI2R-7ZXm-aHzx8bSRa7bbOCrRhW24R23X2Pf4DhvazQs_hrN0kaLI2J411WuNV3PaFg8-gsyvmMorgb3g6j_Jyu8YslPm1ie1z1iFj2BprxFQnAQLgXPNb7zO6Sq1_t0tcDw4m6LHK2rakZy0rY5b4ZrekAhGNh3QeCvBncEsPT6vtk038_BA8o4GJLwz1e1-v0hqS6lugZLl1L9DWHGZ0ptKe9GjzQ"/>
+</div>
+<nav class="hidden md:flex gap-6">
+<!-- Navigation links would go here if this wasn't a landing page focused on a single action -->
+</nav>
+</header>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="relative pt-12 pb-24 md:pt-24 md:pb-32 px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-24">
+<!-- Hero Content -->
+<div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left z-10">
+<span class="font-label-md text-label-md text-secondary tracking-widest uppercase mb-4 opacity-80">Digital Heirlooms</span>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6 text-balance leading-tight">
+                    Create the family memory you always wished you had
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl text-balance">
+                    Upload two separate photos and turn them into one beautiful family portrait. Preserve your heritage with AI-crafted emotional resonance.
+                </p>
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+<button class="bg-primary-container hover:bg-primary text-white w-full sm:w-auto px-8 py-4 rounded-full font-label-md text-label-md transition-all shadow-ambient hover:shadow-ambient-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 h-14 min-h-[56px]">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                        Create My Portrait
+                    </button>
+<button class="bg-transparent text-primary hover:bg-surface-container border-2 border-secondary/20 w-full sm:w-auto px-8 py-4 rounded-full font-label-md text-label-md transition-all flex items-center justify-center gap-2 h-14 min-h-[56px]">
+                        View Samples
+                    </button>
+</div>
+<!-- Trust Indicators -->
+<div class="mt-10 flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-3 opacity-70">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">person_off</span>
+                        No signup required
+                    </div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">lock</span>
+                        Photos remain private
+                    </div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">timer</span>
+                        Ready in minutes
+                    </div>
+</div>
+</div>
+<!-- Hero Visual (Before/After Split Concept) -->
+<div class="flex-1 w-full max-w-lg md:max-w-none relative">
+<!-- Decorative background blob/texture -->
+<div class="absolute -inset-4 bg-surface-container-low rounded-[32px] -z-10 rotate-3 scale-105 transform origin-center opacity-50"></div>
+<!-- Main Visual Container -->
+<div class="relative bg-white rounded-[24px] p-4 shadow-ambient-lg border border-surface-variant">
+<div class="grid grid-cols-2 gap-3 mb-3 h-48 md:h-64">
+<div class="rounded-[16px] overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="A portrait of an elderly Indian woman wearing a traditional saree, warm lighting, muted background. High quality, photorealistic, subtle emotional tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2-LRdAaLcJn4VVoyHjyKVGDCIIMPRP9zNZ0mxuYWAuwWn1DqnSinYnOXP4IPxbxYtAGlhdgsPOFNwXE9hDewGbLk2pQqi7d5-Gftv96O-fdyCme30kywFZzS43VzxB-ZdQGUG307Jq-QiyOPs1jkRg5kM6vXAQqtqAawlO3mDHcbp-OAs51tqdrzp6y56KdaAdKOllQzaToKKkVjNWD36n4QCuJS_LPuTiVFQiUoNsq5TAgTooCxjsQ"/>
+<div class="absolute bottom-2 left-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-medium text-primary shadow-sm">Photo 1</div>
+</div>
+<div class="rounded-[16px] overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="A portrait of a young Indian woman smiling warmly, wearing modern casual attire, soft natural lighting. High quality, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdFcW7R2U0iCJ1mdy39YJ8nj9JrDqDYvF3g9e4A6HPWqAGoKaQJaZYrXy4eg9RhA8Qf78bS87OwXY6l428EACfHKGvLCOoKU433OxRuPrJj3qeac6jgvNQaR_Qt-xi8whZ22DBQznLrEm5caa0qdP-Al2Grq0SMCl8pjiEr3pKWicfm3Oqq5ZZiDW3Ux049jr8qL8VfIRIHUenK1pcTLUn9t1RbrjiSgZ4o2DRBkOpQusalEjcQt87OQ"/>
+<div class="absolute bottom-2 left-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-medium text-primary shadow-sm">Photo 2</div>
+</div>
+</div>
+<div class="relative flex justify-center -my-6 z-20">
+<div class="bg-primary text-white rounded-full p-2 shadow-lg border-4 border-white flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+</div>
+<div class="rounded-[16px] overflow-hidden h-64 md:h-80 bg-surface-container relative mt-3 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A beautiful, emotionally resonant unified portrait of the elderly Indian woman and the young Indian woman together, looking like they are in the same physical space. Warm, nostalgic, premium digital heirlooom style, gentle lighting, rich maroon and gold undertones in the environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjtnHiBE_v6pBo_gyDu6fBs9nJE1Ja0xnSxbzgP-3rsiYsxrGaHEMG2hDuf4_fTgW1QGCcve0K-U8KFcg3kio_IgLAJYnHWjHPJrkXy3j9_l4acrZWhlt7y0rDQNIoHqmHWtL7JOh-jQ8CW76x3IKhXqkXN4fGyMkgne6V3PMIncqZb1LZROHs6CA0gy2LbquUg1tj9hP-simTXCHQ6o3OQNp4UoHSVbTZHXGmElmtj5k59AiLJhWpWg"/>
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-[20px] filled">auto_awesome</span>
+<span class="font-label-md text-label-md">Combined Portrait</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="py-section-margin bg-surface-container-low px-container-padding-mobile md:px-container-padding-desktop">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">The Journey to Your Memory</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Three simple steps to merge separate moments into a single, cohesive family heirloom.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Thread Connector (Desktop only) -->
+<div class="hidden md:block absolute top-12 left-[15%] right-[15%] h-px bg-secondary/30 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center bg-white p-8 rounded-[24px] shadow-ambient">
+<div class="w-16 h-16 rounded-full bg-surface-container text-primary flex items-center justify-center mb-6 shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-[32px]">upload_file</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">1. Upload Photos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Select two clear portraits. Ensure the faces are visible and well-lit for the best result.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center bg-white p-8 rounded-[24px] shadow-ambient">
+<div class="w-16 h-16 rounded-full bg-surface-container text-primary flex items-center justify-center mb-6 shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-[32px]">palette</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">2. Choose Style</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Select from our curated heritage styles—from soft vintage sepia to vibrant modern classic.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center bg-white p-8 rounded-[24px] shadow-ambient">
+<div class="w-16 h-16 rounded-full bg-surface-container text-primary flex items-center justify-center mb-6 shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-[32px]">download</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">3. Download</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Receive your high-resolution digital heirloom, ready to be printed and framed.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Samples Section (Bento Grid Style) -->
+<section class="py-section-margin px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Stories Preserved</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">See how others are bringing their family stories together across time and distance.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+<!-- Card 1: Large -->
+<div class="md:col-span-8 bg-white rounded-[24px] overflow-hidden shadow-ambient group relative h-[400px] md:h-full">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed, emotionally moving portrait of an Indian grandmother and her young grandson. They look as though they are sitting side by side in a softly lit, traditional Indian home with warm, inviting colors. Heritage-modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdlh2I-seyDgbK6wbdHT0-59BtL4glWZ643qAjUAM2aCI5Hfwc7J_BbYsgUlZFbJyxPMkwxQQmHhL0VcrkFWlZcd184XcCTlbta7fZzfZYMDaIZOv7q-bnw8Mg8HHvCJss2RY-7DnDzQxD6_a307xxxCHlGnLIweTKesAGOeCu_xoeYdh_sMukACvGkIKZEeXwUPoeUHqNL1ndE4-dnoBtNGWaf8U8RA6nEbhwCh-W8T7W0Fk9gcV-gQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-8 text-white">
+<span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full font-label-sm text-label-sm mb-3 border border-white/30">Grandparent &amp; Grandchild</span>
+<h3 class="font-headline-sm text-headline-sm mb-2">Bridging Generations</h3>
+<p class="font-body-md text-body-md text-white/90 hidden md:block max-w-md">"My mother never got to meet my son. This portrait brings tears to my eyes every time I look at it."</p>
+</div>
+</div>
+<!-- Column for Cards 2 & 3 -->
+<div class="md:col-span-4 flex flex-col gap-6 h-auto md:h-full">
+<!-- Card 2 -->
+<div class="flex-1 bg-white rounded-[24px] overflow-hidden shadow-ambient group relative min-h-[250px]">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A beautiful unified portrait of two Indian sisters in elegant ethnic wear, smiling warmly. Rich maroon and gold tones in the environment, soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv-qvyq-Zpw33DGPd2p0ONpxgysYzYCVlie4QIwXIslD9TbNgGP7X-tblTASYgRzwynS6gohbcN75Ulshy3DpOs5V1ZPPz0ktEO1o2TYlHFbiZiNce4DebTf4gjdUaoh3AoXTSeXbzs4i_OkfaxOJiDEvOdHDcJ1uQ2_phSIAVdL3libJIFIDw68yx7kMtC1SWRiRA8-iWqlHSe4U4XxkS9UC3WRdRqN0Icqq_wvFAHO9TxKkAPXTcMA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-6 text-white">
+<span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full font-label-sm text-label-sm mb-2 border border-white/30">Siblings</span>
+<h3 class="font-headline-sm text-headline-sm text-lg leading-tight">Together Again</h3>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex-1 bg-white rounded-[24px] overflow-hidden shadow-ambient group relative min-h-[250px]">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A touching portrait of an Indian mother and her adult son. They appear to be outdoors in a beautiful garden setting with soft evening light. Warm, sentimental aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFFbExLhUvuSFrQVvyMEbvMj-AjeuSgeveYFxAl_qbicElBctD-MsnX30cqfJncVSdc4419iRF1V8Vfq_mmOhsNZdCtwydNcmV67RkH_bBdcH_JKcEKEA-3g_y9axvWYqUNhjjc7g1UIb75SIV336IazquFsUR_NAs32uzAugKORaLN8yb-5HGH24L4xEFRfFqdMQChITaCFXacmsoNzuPVyW0coSUeFl13PwrQc6m6BAxNHKGhWvRWA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-6 text-white">
+<span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full font-label-sm text-label-sm mb-2 border border-white/30">Mother &amp; Child</span>
+<h3 class="font-headline-sm text-headline-sm text-lg leading-tight">A Mother's Love</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA & Privacy -->
+<section class="py-24 px-container-padding-mobile md:px-container-padding-desktop text-center relative overflow-hidden bg-primary text-white">
+<!-- Subtle background texture for the dark section -->
+<div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=')]"></div>
+<div class="relative z-10 max-w-3xl mx-auto">
+<span class="material-symbols-outlined text-[48px] text-secondary mb-6 block">lock</span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-6">Ready to create your heirloom?</h2>
+<p class="font-body-lg text-body-lg text-white/80 mb-10 max-w-xl mx-auto">
+                    Your privacy is our priority. Your original photos are automatically deleted after processing. We never store or share your memories.
+                </p>
+<button class="bg-white text-primary hover:bg-surface-container-low px-10 py-5 rounded-full font-label-md text-label-md transition-all shadow-lg hover:-translate-y-1 inline-flex items-center justify-center gap-3 h-16">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+                    Start Creating Now
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-margin px-container-padding-mobile md:px-container-padding-desktop flex flex-col md:flex-row justify-between items-center gap-stack-gap bg-surface-container-highest dark:bg-surface-container border-t border-outline-variant dark:border-outline flat no shadows text-primary dark:text-inverse-primary font-body-md text-body-md">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-headline-sm text-headline-sm text-primary">Yaadon</span>
+<p class="text-on-surface-variant text-sm text-center md:text-left">© 2024 Yaadon. Preserving heritage through AI.</p>
+</div>
+<nav class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 font-label-sm text-label-sm">
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-colors" href="#">Help Center</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+</nav>
+</footer>
+</body></html>

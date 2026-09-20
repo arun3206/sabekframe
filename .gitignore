@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+.open-next/
+out/
+
+# Cloudflare generated types and local state
+cloudflare-env.d.ts
+.wrangler/
+
+# Production and test output
+dist/
+coverage/
+test-results/
+playwright-report/
+blob-report/
+
+# Environment files (the example is safe to commit)
+.env*
+!.env.example
+
+# Local tooling and temporary files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.tsbuildinfo
+.pnpm-store/
+
+# Sensitive local media
+/uploads/
+generated/
+private-media/
+quality-samples/
+infrastructure/cdk.out/
+infrastructure/dist/
+
+# Local diagnostic files
+job-key.json

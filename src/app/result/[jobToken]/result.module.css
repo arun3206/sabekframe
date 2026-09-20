@@ -1,0 +1,21 @@
+.card {
+  display: grid;
+  gap: 1rem;
+  margin-block: 1.5rem;
+  text-align: center;
+}
+.card h1,
+.card p {
+  margin: 0;
+}
+.portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #eee5da;
+}
+.portrait img {
+  object-fit: contain;
+}

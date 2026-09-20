@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yaadon - Portrait Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#fbf9f8",
+                      "inverse-primary": "#ffb3b5",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-fixed-variant": "#474742",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#ff828a",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#40000b",
+                      "primary-fixed": "#ffdada",
+                      "inverse-on-surface": "#f3f0f0",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#ffdea5",
+                      "primary": "#570013",
+                      "surface-container-high": "#eae8e7",
+                      "on-secondary-fixed": "#261900",
+                      "surface-container": "#f0eded",
+                      "on-background": "#1b1c1c",
+                      "on-surface": "#1b1c1c",
+                      "surface-tint": "#af2b3e",
+                      "on-surface-variant": "#584141",
+                      "on-tertiary-container": "#a9a9a2",
+                      "tertiary-fixed": "#e4e3db",
+                      "on-secondary-container": "#785a1a",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "tertiary-fixed-dim": "#c8c7bf",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface": "#fbf9f8",
+                      "inverse-surface": "#303030",
+                      "tertiary-container": "#3d3e39",
+                      "secondary-fixed-dim": "#e9c176",
+                      "outline-variant": "#e0bfbf",
+                      "surface-container-highest": "#e4e2e1",
+                      "surface-bright": "#fbf9f8",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#fed488",
+                      "on-tertiary-fixed": "#1b1c17",
+                      "secondary": "#775a19",
+                      "surface-variant": "#e4e2e1",
+                      "tertiary": "#272823",
+                      "primary-fixed-dim": "#ffb3b5",
+                      "surface-dim": "#dcd9d9",
+                      "primary-container": "#800020",
+                      "on-primary-fixed-variant": "#8e0f28",
+                      "outline": "#8c7071"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "container-padding-desktop": "40px",
+                      "section-margin": "64px",
+                      "container-padding-mobile": "20px",
+                      "stack-gap": "24px"
+              },
+              "fontFamily": {
+                      "headline-sm": [
+                              "EB Garamond"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "EB Garamond"
+                      ],
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "EB Garamond"
+                      ],
+                      "display-lg-mobile": [
+                              "EB Garamond"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .carousel-container {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-item {
+            scroll-snap-align: center;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background docked full-width top-0 flat no shadows flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 max-w-7xl mx-auto z-40 sticky">
+<button aria-label="Go back" class="text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-inverse-primary text-center flex-1">Yaadon</h1>
+<div class="w-10"></div> <!-- Placeholder for balance -->
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop py-stack-gap flex flex-col md:flex-row gap-section-margin pb-32 md:pb-stack-gap">
+<!-- Left Column: Carousel Area -->
+<section class="w-full md:w-1/2 flex flex-col items-center justify-center relative">
+<div class="text-center mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Your beautiful memory is ready</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose the portrait you love the most.</p>
+</div>
+<!-- Swipeable Carousel -->
+<div class="carousel-container flex overflow-x-auto gap-4 w-full px-4 py-4 max-w-sm mx-auto">
+<!-- Portrait 1 (Selected) -->
+<div class="carousel-item flex-shrink-0 w-64 h-[320px] relative rounded-3xl overflow-hidden cursor-pointer shadow-[0_4px_20px_0_rgba(128,0,32,0.06)] ring-2 ring-primary-container bg-surface-container-lowest transition-transform hover:scale-[1.02]">
+<img class="w-full h-full object-cover" data-alt="A beautifully restored vintage portrait of an Indian family, featuring intricate traditional clothing and soft, warm, nostalgic lighting. The aesthetic is highly polished and hyper-realistic, capturing a sense of heritage and timeless elegance in a light-mode friendly studio setting. Delicate, soft focus in the background to emphasize the subjects." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANRtnnLJkVfDLLhQ3lPTGU4rpjlRhbFWSYxKKvJl5hBNG2O-rFj5sv2VAPWeSU8lOGFUmWZne3cNX9MPJqZyyzGBqdlzUmP2vIqUtRhh5XLixUzhliGFBE6kKs0x9lesmqG9IOrONEn9pgpoJLkUB5R2T-hK9TWPq3mqUdZGTz8Sq-MMWbX0wJ9UEkcIAxV36OyQVcRpCPjqiA5-di_PtYNSbMyAHZ-GskRlANbeq-I8eGdx1hGUe-og"/>
+<!-- Watermark overlay -->
+<div class="absolute inset-0 bg-white/20 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
+<span class="font-headline-sm text-headline-sm text-white opacity-70 rotate-[-15deg] uppercase tracking-widest drop-shadow-md">Yaadon Preview</span>
+</div>
+<!-- Selected Badge -->
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-container w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm font-bold" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Portrait 2 (Unselected) -->
+<div class="carousel-item flex-shrink-0 w-64 h-[320px] relative rounded-3xl overflow-hidden cursor-pointer shadow-[0_4px_20px_0_rgba(128,0,32,0.04)] bg-surface-container-lowest transition-transform hover:scale-[1.02] opacity-80 hover:opacity-100">
+<img class="w-full h-full object-cover grayscale-[20%]" data-alt="Another high-quality AI restoration of a vintage Indian family photo. The scene is warmly lit with a soft golden hour glow, highlighting the rich textures of the traditional garments. The composition is classic, evoking a sense of deep nostalgia and familial bond within a premium, minimalist light-mode design context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDivDNYub1uR2wYsMquRSYxhoaaYJruT_ylxpFujJ-B8T4YcV1L-uv3RpCPbKRKI6_ZCddpTWqPfLMo7PYEEOaipMidSTgx6r_o3RzludH3xQe9dqo0SMCnViE_C1ZzmGz6BHJDie99GEVR5s4aleacgok8bXhKV64yBgH5XwZE3v2UMc6XIovFToY9i-gOazCmRz96v1uBsP_pJIemhDkOw-foLLQLAh7GekqTkeY-vRU1D3cXywH-7Q"/>
+<!-- Watermark overlay -->
+<div class="absolute inset-0 bg-white/20 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
+<span class="font-headline-sm text-headline-sm text-white opacity-70 rotate-[-15deg] uppercase tracking-widest drop-shadow-md">Yaadon Preview</span>
+</div>
+</div>
+<!-- Portrait 3 (Unselected) -->
+<div class="carousel-item flex-shrink-0 w-64 h-[320px] relative rounded-3xl overflow-hidden cursor-pointer shadow-[0_4px_20px_0_rgba(128,0,32,0.04)] bg-surface-container-lowest transition-transform hover:scale-[1.02] opacity-80 hover:opacity-100">
+<img class="w-full h-full object-cover grayscale-[20%]" data-alt="A third premium AI generation of an old Indian family portrait, restored to perfect clarity. The subjects are posed elegantly against a soft, muted backdrop that complements the heritage-modern aesthetic. The lighting is diffused and flattering, creating a digital heirloom feel suitable for a high-end application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEoRm4Y4Ni-tEQBhUQZh4P2v1i6IQQ9cCvXOAEs3SJKhbQuwqSytfr0BqQF9j6tKxRJ13Im9ynnIKBoUVCJg6LwnCD8G58STOi17cstLi2MLb9rfessxTUDNCbcrqeDT8iCcGD0BRL6iKNnKLYoT5sWf71UZaGeXW161dw0d9e7GN5RVIda9JSSR_ZoJywP1YaUgG5lEhs-TT4b6DmRBSmjwOWFucxiNWfu62EChkEIUVXn8Y8aW5Mwg"/>
+<!-- Watermark overlay -->
+<div class="absolute inset-0 bg-white/20 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
+<span class="font-headline-sm text-headline-sm text-white opacity-70 rotate-[-15deg] uppercase tracking-widest drop-shadow-md">Yaadon Preview</span>
+</div>
+</div>
+</div>
+<!-- Carousel Indicators -->
+<div class="flex gap-2 mt-6">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<div class="w-2 h-2 rounded-full bg-surface-dim"></div>
+<div class="w-2 h-2 rounded-full bg-surface-dim"></div>
+</div>
+</section>
+<!-- Right Column: Action Area -->
+<section class="w-full md:w-1/2 flex flex-col justify-center">
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_8px_30px_0_rgba(128,0,32,0.04)] mb-8">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">Select Option</h3>
+<!-- Option 1 -->
+<label class="flex items-center justify-between p-4 mb-4 rounded-xl border border-outline-variant cursor-pointer hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-outline flex items-center justify-center group-hover:border-primary-container">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<div>
+<span class="font-body-md text-body-md text-on-surface block font-medium">Single Portrait</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Download selected in HD</span>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">₹49</span>
+<input class="hidden" name="purchase_option" type="radio" value="single"/>
+</label>
+<!-- Option 2 (Selected) -->
+<label class="flex items-center justify-between p-4 rounded-xl border-2 border-primary-container bg-primary-fixed/20 cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-[#C5A059] text-white font-label-sm text-label-sm px-3 py-1 rounded-bl-lg font-bold shadow-sm">
+                        Best Value
+                    </div>
+<div class="flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-primary-container flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div>
+</div>
+<div>
+<span class="font-body-md text-body-md text-on-surface block font-medium">All Three Portraits</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Download all options in HD</span>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mr-16">₹79</span>
+<input checked="" class="hidden" name="purchase_option" type="radio" value="bundle"/>
+</label>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-4">
+<button class="w-full bg-primary-container text-on-primary h-[56px] rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-xl">lock</span>
+                    Continue to Secure Payment
+                </button>
+<button class="w-full h-[44px] rounded-full font-label-md text-label-md text-primary-container border border-transparent hover:border-[#C5A059] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">refresh</span>
+                    Faces don’t look right? Try once more
+                </button>
+</div>
+<!-- Trust Indicators -->
+<div class="mt-8 flex flex-col items-center gap-4 border-t border-outline-variant pt-6">
+<div class="flex items-center gap-6 opacity-60 grayscale">
+<!-- Fake UPI/Secure Icons using Material Symbols for visual structure -->
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+<span class="font-label-sm text-label-sm">UPI Accepted</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+<span class="font-label-sm text-label-sm">Secure Payment</span>
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center max-w-xs opacity-70">
+                    Your photos are private and automatically deleted from our servers after 24 hours.
+                </p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Hidden on Web, visible on Mobile - Suppressed based on rules since this is a transactional step, but keeping the shell as requested if it was a destination, however rules say: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: Linear/Transactional". Therefore, omitting BottomNavBar and Footer as this is a focused checkout/results screen.) -->
+<!-- Using a simplified footer for trust on this transactional page -->
+<footer class="w-full py-6 border-t border-outline-variant dark:border-outline flex justify-center items-center bg-surface-container-highest dark:bg-surface-container mt-auto">
+<p class="font-label-sm text-label-sm text-on-tertiary-fixed-variant">© 2024 Yaadon. Preserving heritage through AI.</p>
+</footer>
+</body></html>

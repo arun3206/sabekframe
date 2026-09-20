@@ -1,0 +1,6 @@
+{
+  "app": "pnpm exec tsx bin/yaadon-infrastructure.ts",
+  "context": {
+    "@aws-cdk/aws-s3:serverAccessLogsUseBucketPolicy": true
+  }
+}

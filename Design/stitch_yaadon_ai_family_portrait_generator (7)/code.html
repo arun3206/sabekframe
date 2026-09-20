@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Success - Yaadon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#fbf9f8",
+                        "inverse-primary": "#ffb3b5",
+                        "surface-container-low": "#f6f3f2",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#ff828a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#40000b",
+                        "primary-fixed": "#ffdada",
+                        "inverse-on-surface": "#f3f0f0",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea5",
+                        "primary": "#570013",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed": "#261900",
+                        "surface-container": "#f0eded",
+                        "on-background": "#1b1c1c",
+                        "on-surface": "#1b1c1c",
+                        "surface-tint": "#af2b3e",
+                        "on-surface-variant": "#584141",
+                        "on-tertiary-container": "#a9a9a2",
+                        "tertiary-fixed": "#e4e3db",
+                        "on-secondary-container": "#785a1a",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "tertiary-fixed-dim": "#c8c7bf",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "inverse-surface": "#303030",
+                        "tertiary-container": "#3d3e39",
+                        "secondary-fixed-dim": "#e9c176",
+                        "outline-variant": "#e0bfbf",
+                        "surface-container-highest": "#e4e2e1",
+                        "surface-bright": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fed488",
+                        "on-tertiary-fixed": "#1b1c17",
+                        "secondary": "#775a19",
+                        "surface-variant": "#e4e2e1",
+                        "tertiary": "#272823",
+                        "primary-fixed-dim": "#ffb3b5",
+                        "surface-dim": "#dcd9d9",
+                        "primary-container": "#800020",
+                        "on-primary-fixed-variant": "#8e0f28",
+                        "outline": "#8c7071"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-padding-desktop": "40px",
+                        "section-margin": "64px",
+                        "container-padding-mobile": "20px",
+                        "stack-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["EB Garamond"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["EB Garamond"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["EB Garamond"],
+                        "display-lg-mobile": ["EB Garamond"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #C5A059; /* Gold accent */
+            opacity: 0;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Confetti Container -->
+<div class="absolute inset-0 pointer-events-none z-0 overflow-hidden hidden md:block" id="confetti-container"></div>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center py-section-margin px-container-padding-mobile md:px-container-padding-desktop z-10 w-full max-w-7xl mx-auto">
+<!-- Celebration Header -->
+<div class="text-center mb-stack-gap max-w-2xl mx-auto">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#E8F0EA] mb-6">
+<span class="material-symbols-outlined text-[#6B8E73] text-4xl" data-icon="check_circle">check_circle</span>
+</div>
+<h1 class="font-headline-md text-headline-md md:font-display-lg text-display-lg text-primary mb-4">Your memory is ready to keep</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Payment Successful. Order #YA-12345</p>
+</div>
+<!-- Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-gap w-full max-w-5xl">
+<!-- Portrait Display Column -->
+<div class="lg:col-span-5 flex flex-col items-center">
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_40px_rgba(128,0,32,0.06)] border border-surface-container-highest w-full max-w-sm relative">
+<img alt="Restored Portrait" class="w-full aspect-[4/5] object-cover rounded-lg shadow-inner" data-alt="A beautifully restored, high-definition vintage family portrait of an Indian family from the 1970s. The image is crisp, clear, and perfectly color-graded, retaining its nostalgic warmth but with modern clarity. Soft, natural lighting highlights the intricate details of traditional clothing. The overall aesthetic is premium, heartfelt, and entirely free of digital artifacts or watermarks." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8MOEJw3UIEbAYjRYPsXHkTWz2p2Icp5ENaFwr_uRVGRk9Qm0laka0SBL6YDIOoXBac-sS50tKGQsplRersLL0EtDPTZgwz3VizV6G3yo_DlTkXoQG0Fn0ClYZ9xPDPDJrv8RFouAB39qnhkm0uVGTfU7tTbEm96n-0VTzIMciCsD3GU-9n9QF0SiH26Rf3NZY6INc_YoQQEF7ryHIxrsBbFNGumE1Vt9Om3csv3rOL2PT0kAfBuCOFA"/>
+<!-- Expire Notice Overlay -->
+<div class="absolute bottom-6 left-6 right-6 bg-surface-container-highest/90 backdrop-blur-sm rounded-lg p-3 text-center border border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+                            Link expires in 24h for your privacy
+                        </p>
+</div>
+</div>
+</div>
+<!-- Actions Column -->
+<div class="lg:col-span-7 flex flex-col justify-center gap-stack-gap">
+<!-- Primary Actions -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_40px_rgba(128,0,32,0.04)] border border-surface-container-highest flex flex-col gap-4">
+<button class="w-full h-[56px] bg-primary text-on-primary rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Download HD Portrait
+                    </button>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 h-[44px] bg-surface-container-lowest border-2 border-[#C5A059] text-[#785a1a] rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-secondary-fixed/20 transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                            Share on WhatsApp
+                        </button>
+<button class="flex-1 h-[44px] bg-surface-container text-on-surface rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+                            Copy private link
+                        </button>
+</div>
+</div>
+<!-- Email Backup -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_40px_rgba(128,0,32,0.04)] border border-surface-container-highest">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Want a backup copy?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">We'll email you a secure download link before the file is deleted.</p>
+<div class="flex flex-col sm:flex-row gap-3">
+<input class="flex-1 h-[44px] bg-[#FFFDF5] border border-[#e9c176] rounded-lg px-4 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent placeholder:text-on-surface-variant/50" placeholder="Enter your email" type="email"/>
+<button class="h-[44px] px-6 bg-surface-container-highest text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors whitespace-nowrap">
+                            Send Backup
+                        </button>
+</div>
+</div>
+<!-- Final CTA -->
+<div class="text-center mt-4">
+<button class="text-primary font-label-md text-label-md hover:underline decoration-2 underline-offset-4 flex items-center justify-center gap-2 mx-auto">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                        Create Another Portrait
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component from JSON (Adapted for linear flow context - simplified) -->
+<footer class="w-full py-section-margin px-container-padding-mobile md:px-container-padding-desktop flex flex-col md:flex-row justify-between items-center gap-stack-gap border-t border-outline-variant bg-surface-container-highest mt-auto z-10 relative">
+<div class="font-headline-sm text-headline-sm text-primary">© 2024 Yaadon. Preserving heritage through AI.</div>
+<div class="flex gap-4 font-label-sm text-label-sm text-on-tertiary-fixed-variant">
+<a class="hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors hover:underline" href="#">Help Center</a>
+<a class="hover:text-primary transition-colors hover:underline" href="#">Contact Us</a>
+</div>
+</footer>
+<script>
+        // Simple confetti effect for celebration
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('confetti-container');
+            if (!container) return;
+
+            const colors = ['#C5A059', '#800020', '#ffb3b5', '#ffffff'];
+            const confettiCount = 50;
+
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+
+                // Randomize properties
+                const left = Math.random() * 100;
+                const animDuration = Math.random() * 3 + 2;
+                const delay = Math.random() * 2;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                confetti.style.left = `${left}vw`;
+                confetti.style.backgroundColor = color;
+                confetti.style.animation = `fall ${animDuration}s linear ${delay}s forwards`;
+
+                // Randomize shape slightly
+                if(Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+
+                container.appendChild(confetti);
+            }
+        });
+    </script>
+</body></html>

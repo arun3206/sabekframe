@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sabekframe",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "observability": {
+    "enabled": true,
+  },
+  "vars": {
+    "UPLOAD_STORAGE_PROVIDER": "aws",
+    "RATE_LIMIT_PROVIDER": "dynamodb",
+    "AWS_REGION": "ap-south-1",
+    "AWS_RAW_UPLOADS_BUCKET": "yaadonphotostorage-production-rawuploadsa47b37a6-ivr5bryywaer",
+    "AWS_SANITIZED_UPLOADS_BUCKET": "yaadonphotostorage-produc-sanitizeduploads2680064b-sqvbke6uv6eu",
+    "AWS_UPLOADS_TABLE": "YaadonPhotoStorage-production-UploadStateE11FA401-AU0M3O6YOVWP",
+    "AWS_UPLOAD_FINALIZER_FUNCTION": "YaadonPhotoStorage-producti-UploadFinalize95BAAF09-74vLltr93Hac",
+    "AWS_PROVIDER_SECRETS_ID": "yaadon/production/provider-api-keys",
+    "RAZORPAY_MODE": "LIVE",
+    "AWS_RAZORPAY_SECRET_ID": "ai-photo-generator/razorpay/live",
+    "RAZORPAY_CURRENCY": "INR",
+    "RAZORPAY_PORTRAIT_PRICE": "2900",
+  },
+}

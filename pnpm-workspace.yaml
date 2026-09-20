@@ -1,0 +1,14 @@
+packages:
+  - "."
+  - "infrastructure"
+
+allowBuilds:
+  esbuild: true
+  unrs-resolver: false
+  workerd: true
+
+confirmModulesPurge: false
+
+verifyDepsBeforeRun: false
+
+nodeLinker: hoisted

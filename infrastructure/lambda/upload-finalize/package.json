@@ -1,0 +1,9 @@
+{
+  "name": "yaadon-upload-finalize",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "sharp": "0.35.3"
+  }
+}

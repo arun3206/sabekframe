@@ -1,0 +1,17 @@
+# Roadmap
+
+1. **Foundation and design system** — Done when requirements and architecture are approved; Node/Next/tooling are pinned; design tokens, domain types, central configuration, provider boundary, placeholder routes, and quality checks build successfully.
+2. **Landing page** — Done when the responsive, accessible page communicates value, process, pricing, privacy reassurance, and a tracked primary CTA using the approved design without starting an invalid session.
+3. **Relationship selection — Complete** — All four configured relationships render as accessible radio cards, Brother & Sister is campaign-featured through configuration, one selection is required and restored safely, upload labels derive from central data, and component tests cover the user-visible behavior.
+4. **Anonymous flow-state management — Complete for uploads** — An HttpOnly server session owns assets; the safe browser draft restores only opaque IDs and non-sensitive metadata.
+5. **Photo upload UI — Complete** — Two relationship-labelled pickers support mobile capture/browse, desktop drop, preview/replace/remove, consent, local face/quality checks, and accessible validation states.
+6. **Server-side upload validation — Complete** — Private upload authorization and finalisation validate signature/type, dimensions, frames, corruption, ownership, rate limits, server-side face-crop quality, re-encoding, and failure cleanup.
+7. **Occasion and template selection** — Done when configured options and representative samples are responsive, keyboard/screen-reader accessible, persisted, and covered by selection tests.
+8. **Review screen** — Done when both safe previews and all choices can be reviewed/edited, price and retention are clear, double submission is prevented, and the generation request is idempotent.
+9. **Mock generation workflow** — Done when a deterministic adapter exercises queued/generating/failed/preview-ready states, recovery survives refresh, three watermarked previews are produced, and tests cover retries.
+10. **Real AI-provider evaluation** — Done when candidates are scored on identity, image quality, safety, latency, privacy, cost, reliability, and commercial rights; a decision is recorded and its adapter passes common contract tests.
+11. **Result and preview screen** — Done when a high-entropy link safely presents three accessible watermarked previews, selection and expiry/recovery work on mobile, and unauthorized/expired links leak nothing.
+12. **Razorpay payment** — Done when server-priced orders, UPI checkout, raw-body webhook verification, callback verification, idempotency, delayed events, failure/cancel/retry, and test-mode integration all pass.
+13. **Secure download** — Done when only purchased files receive short-lived signed URLs, one-versus-all entitlements are enforced, mobile download/share fallbacks work, and optional email delivery creates no account.
+14. **Privacy cleanup jobs** — Done when configured deadlines delete source/generated objects and associated metadata as specified, jobs are idempotent/observable, retries alert, and deletion is verified end to end.
+15. **Analytics and production hardening** — Done when consent-aware funnel/reliability metrics contain no photo data, rate limiting and abuse controls are load-tested, accessibility/performance/security reviews pass, runbooks/alerts exist, and launch acceptance criteria are signed off.

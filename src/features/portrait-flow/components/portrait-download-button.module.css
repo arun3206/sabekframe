@@ -1,0 +1,36 @@
+.downloadArea {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.downloadButton {
+  width: 100%;
+  gap: 0.55rem;
+}
+
+.downloadButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.downloadButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.spinner {
+  animation: spin 0.9s linear infinite;
+}
+
+.error {
+  margin: 0;
+  color: #a12d2d;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

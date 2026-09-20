@@ -1,0 +1,562 @@
+.page {
+  width: min(100% - 2rem, 34rem);
+  padding-top: 1.5rem;
+}
+.loading {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  color: var(--color-muted);
+}
+.heading {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.heading h1 {
+  max-width: 16ch;
+}
+.flowSection {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+  scroll-margin-top: 1rem;
+}
+.validationSection {
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: #fff4f2;
+  box-shadow: 0 0 0 2px rgb(164 40 40 / 22%);
+}
+.validationMessage {
+  margin: 0;
+  color: #8c2020;
+  font-weight: 750;
+}
+.sectionHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.sectionHeading h2,
+.sectionHeading p {
+  margin: 0;
+}
+.sectionHeading h2 {
+  color: var(--color-primary-dark);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.65rem;
+  line-height: 1.1;
+}
+.sectionHeading p {
+  margin-top: 0.25rem;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+.sectionNumber {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 800;
+}
+.relationshipGrid,
+.templateGrid {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.hiddenLegend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.relationshipOption {
+  position: relative;
+  min-height: 6.5rem;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) 1.5rem;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem;
+  border: 1px solid var(--color-outline);
+  border-radius: 1.15rem;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+.relationshipOption > input,
+.templateOption > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+.relationshipOption:has(input:focus-visible),
+.templateOption:has(input:focus-visible) {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.relationshipSelected,
+.templateSelected {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 1px var(--color-primary),
+    var(--shadow-card);
+}
+.relationshipImage {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  overflow: hidden;
+  border-radius: 0.85rem;
+  background: #eee5da;
+}
+.relationshipImage img {
+  object-fit: cover;
+}
+.relationshipCopy {
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+.relationshipCopy small {
+  width: fit-content;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: #f3e9df;
+  color: var(--color-primary);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+.relationshipCopy strong {
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+}
+.relationshipCopy span {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+.relationshipOption > svg,
+.templateOption > svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--color-primary);
+}
+.optionDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.lockedNote {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.lockedPanel {
+  min-height: 6rem;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  border: 1px dashed #d8c5ad;
+  border-radius: 1rem;
+  background: #fffaf1;
+  color: var(--color-muted);
+  text-align: center;
+}
+.selectedTemplate {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem;
+  border: 1px solid var(--color-outline);
+  border-radius: 1rem;
+  background: #fffaf1;
+}
+.selectedTemplateImage {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #eee5da;
+}
+.selectedTemplateImage img {
+  object-fit: cover;
+}
+.selectedTemplate > span:not(.selectedTemplateImage) {
+  min-width: 0;
+  display: grid;
+  gap: 0.1rem;
+}
+.selectedTemplate small {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+.selectedTemplate strong {
+  overflow: hidden;
+  color: var(--color-primary-dark);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.changeTemplate {
+  min-width: 3.5rem;
+  min-height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.changeTemplate:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.cards {
+  display: grid;
+  gap: 1rem;
+}
+.singleCard {
+  max-width: 31rem;
+}
+.photoGuidance {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.9rem 1rem 0.9rem 2rem;
+  border-radius: 1rem;
+  background: #fffaf1;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+.card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.error {
+  border-color: #a42828;
+}
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-primary-dark);
+}
+.cardTitle h2 {
+  flex: 1;
+  margin: 0;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.45rem;
+}
+.roleNumber {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #f3e9df;
+  font-weight: 800;
+}
+.hiddenInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.dropzone {
+  min-height: 11rem;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  border: 2px dashed #d8c5ad;
+  border-radius: 1.1rem;
+  background: #fffaf1;
+  color: var(--color-primary);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+}
+.dropzone small {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+.dropzone:focus-visible,
+.secondary:focus-visible,
+.consent:has(input:focus-visible) {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.preview {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background: #eee;
+}
+.preview img {
+  object-fit: cover;
+}
+.status {
+  min-height: 1.5rem;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+.error .status {
+  color: #8c2020;
+  font-weight: 650;
+}
+.uploadProgress {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+.actions .button {
+  min-height: 3rem;
+  padding-inline: 0.65rem;
+  font-size: 0.9rem;
+}
+.secondary {
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem;
+  border: 1px solid var(--color-outline);
+  border-radius: 0.9rem;
+  background: white;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.secondary svg,
+.actions svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.privacy {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #f5ede2;
+  color: var(--color-primary-dark);
+  font-size: 0.88rem;
+}
+.privacy p {
+  margin: 0 0 0.35rem;
+}
+.privacy a {
+  font-weight: 750;
+}
+.templateGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.templateGroup {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.templateGroup + .templateGroup {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-outline);
+}
+.templateGroupTitle {
+  margin-bottom: 0.1rem;
+  color: var(--color-primary-dark);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 750;
+}
+.templateGrid:disabled,
+.templateGrid[disabled] {
+  opacity: 0.55;
+}
+.templateOption {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.55rem;
+  border: 1px solid var(--color-outline);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+.templateGrid[disabled] .templateOption {
+  cursor: not-allowed;
+}
+.templateArtwork {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 0.7rem;
+  background: #eee5da;
+}
+.templateArtwork img {
+  object-fit: contain;
+}
+.previewFallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+.templateCopy {
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0 0.15rem 0.2rem;
+}
+.templateCopy strong {
+  padding-right: 1.35rem;
+  color: var(--color-primary-dark);
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+.templateCopy small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.templateOption > svg {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.8rem;
+  padding: 0.15rem;
+  border-radius: 999px;
+  background: white;
+}
+.consent {
+  min-height: 3.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.92rem;
+}
+.consent label {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.consent input {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+  accent-color: var(--color-primary);
+}
+.consent p {
+  grid-column: 2;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+.consent a {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-underline-offset: 0.15rem;
+}
+.purchaseNote {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-outline);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  text-align: center;
+}
+.purchaseNote strong {
+  color: var(--color-primary);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 2rem;
+}
+.purchaseNote span {
+  font-weight: 750;
+}
+.purchaseNote p,
+.purchaseNote small {
+  margin: 0;
+}
+.purchaseNote small {
+  color: var(--color-muted);
+}
+@media (min-width: 768px) {
+  .page {
+    width: min(100% - 3rem, 62rem);
+  }
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .heading {
+    max-width: 42rem;
+  }
+  .relationshipGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .templateGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .templateGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

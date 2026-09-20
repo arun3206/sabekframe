@@ -1,0 +1,24 @@
+{
+  "name": "@yaadon/infrastructure",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit",
+    "prepare:lambda": "npm install --prefix lambda/upload-finalize --omit=dev --include=optional --os=linux --cpu=x64 --libc=glibc",
+    "synth": "cdk synth -c environment=dev -c region=ap-south-1 -c allowedOrigins=http://localhost:3000",
+    "diff": "cdk diff -c environment=dev -c region=ap-south-1 -c allowedOrigins=http://localhost:3000",
+    "deploy:dev": "pnpm prepare:lambda && cdk deploy -c environment=dev -c region=ap-south-1 -c allowedOrigins=http://localhost:3000 --require-approval broadening",
+    "diff:production": "pnpm prepare:lambda && cdk diff -c environment=production -c account=867982505694 -c region=ap-south-1 -c allowedOrigins=https://sabekframe.arunjaiswal139.workers.dev,https://cherishkit.com,https://www.cherishkit.com,https://ai-photo-generator.arunjaiswal139.workers.dev",
+    "upload:templates:production": "node scripts/upload-production-templates.mjs",
+    "deploy:production": "pnpm prepare:lambda && cdk deploy -c environment=production -c account=867982505694 -c region=ap-south-1 -c allowedOrigins=https://sabekframe.arunjaiswal139.workers.dev,https://cherishkit.com,https://www.cherishkit.com,https://ai-photo-generator.arunjaiswal139.workers.dev --require-approval broadening && pnpm upload:templates:production"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.265.0",
+    "constructs": "10.8.1"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1137.0",
+    "tsx": "4.23.12",
+    "typescript": "^6.0.0"
+  }
+}
