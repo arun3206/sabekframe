@@ -2,23 +2,63 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createPortraitDownloadFileName } from "@/config/portrait-download";
 import { PortraitDownloadButton } from "@/features/portrait-flow/components/portrait-download-button";
-import { storePortraitTemplate } from "@/features/portrait-flow/storage";
 
-const { trackImageDownloaded } = vi.hoisted(() => ({
+const mocks = vi.hoisted(() => ({
+  getGeneration: vi.fn(),
+  createPaymentOrder: vi.fn(),
+  openRazorpayCheckout: vi.fn(),
+  verifyPayment: vi.fn(),
+  trackCheckoutStarted: vi.fn(),
   trackImageDownloaded: vi.fn(),
+  trackPurchase: vi.fn(),
 }));
 
-vi.mock("@/lib/analytics", () => ({ trackImageDownloaded }));
+vi.mock("@/features/portrait-flow/generation-client", () => ({
+  getGeneration: mocks.getGeneration,
+}));
+vi.mock("@/features/portrait-flow/payment-client", () => ({
+  createPaymentOrder: mocks.createPaymentOrder,
+  openRazorpayCheckout: mocks.openRazorpayCheckout,
+  verifyPayment: mocks.verifyPayment,
+}));
+vi.mock("@/lib/analytics", () => ({
+  trackCheckoutStarted: mocks.trackCheckoutStarted,
+  trackImageDownloaded: mocks.trackImageDownloaded,
+  trackPurchase: mocks.trackPurchase,
+}));
 
 describe("PortraitDownloadButton", () => {
-  const imageUrl = "/api/generations/job-token/output";
+  const jobToken = "67de847e-8e05-4f44-a78b-b1d19dc0b227";
   let downloadedFileName: string | undefined;
 
   beforeEach(() => {
     downloadedFileName = undefined;
-    window.localStorage.clear();
-    trackImageDownloaded.mockClear();
-    storePortraitTemplate(window.localStorage, "janmashtami-little-krishna-001");
+    vi.clearAllMocks();
+    mocks.getGeneration.mockResolvedValue({
+      jobToken,
+      templateId: "janmashtami-little-krishna-001",
+      status: "complete",
+    });
+    mocks.createPaymentOrder.mockResolvedValue({
+      paymentId: jobToken,
+      razorpayOrderId: "order_test",
+      razorpayKeyId: "rzp_test_example",
+      amount: 2900,
+      currency: "INR",
+      displayAmount: "₹29",
+      paid: false,
+    });
+    mocks.openRazorpayCheckout.mockImplementation(
+      async (_order: unknown, onOpened?: () => void) => {
+        onOpened?.();
+        return {
+          razorpay_payment_id: "pay_test",
+          razorpay_order_id: "order_test",
+          razorpay_signature: "a".repeat(64),
+        };
+      },
+    );
+    mocks.verifyPayment.mockResolvedValue({ paid: true });
     Object.defineProperty(URL, "createObjectURL", {
       configurable: true,
       value: vi.fn(() => "blob:portrait"),
@@ -47,50 +87,78 @@ describe("PortraitDownloadButton", () => {
     );
   });
 
-  it.each([
-    ["image/png", "png"],
-    ["image/jpeg", "jpg"],
-  ])(
-    "downloads the displayed %s output with the correct extension",
-    async (type, extension) => {
-      const blob = new Blob([new Uint8Array([1, 2, 3])], { type });
-      const fetchMock = vi.fn().mockResolvedValue({
-        ok: true,
-        blob: vi.fn().mockResolvedValue(blob),
-      });
-      vi.stubGlobal("fetch", fetchMock);
-      render(<PortraitDownloadButton imageUrl={imageUrl} />);
+  it("takes payment before downloading the HD portrait", async () => {
+    const blob = new Blob([new Uint8Array([1, 2, 3])], { type: "image/png" });
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      blob: vi.fn().mockResolvedValue(blob),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    const onUnlocked = vi.fn();
+    render(<PortraitDownloadButton jobToken={jobToken} onUnlocked={onUnlocked} />);
 
-      fireEvent.click(screen.getByRole("button", { name: "Download Portrait" }));
+    fireEvent.click(screen.getByRole("button", { name: "Download HD Portrait" }));
 
-      expect(screen.getByRole("button", { name: "Downloading..." })).toBeDisabled();
-      await waitFor(() =>
-        expect(downloadedFileName).toMatch(
-          new RegExp(`^my-krishna-portrait-\\d{8}-\\d{6}-[a-f0-9]{8}\\.${extension}$`),
-        ),
-      );
-      expect(fetchMock).toHaveBeenCalledOnce();
-      expect(fetchMock).toHaveBeenCalledWith(imageUrl, { credentials: "same-origin" });
-      expect(screen.getByRole("button", { name: "Download Portrait" })).toBeEnabled();
-      expect(trackImageDownloaded).toHaveBeenCalledWith(
-        expect.objectContaining({ id: "janmashtami-little-krishna-001" }),
-      );
-    },
-  );
+    await waitFor(() => expect(downloadedFileName).toMatch(/\.png$/));
+    expect(mocks.createPaymentOrder).toHaveBeenCalledWith(
+      jobToken,
+      "janmashtami-little-krishna-001",
+    );
+    expect(mocks.openRazorpayCheckout).toHaveBeenCalledOnce();
+    expect(mocks.verifyPayment).toHaveBeenCalledOnce();
+    expect(mocks.verifyPayment.mock.invocationCallOrder[0]).toBeLessThan(
+      fetchMock.mock.invocationCallOrder[0]!,
+    );
+    expect(fetchMock).toHaveBeenCalledWith(`/api/generations/${jobToken}/output`, {
+      credentials: "same-origin",
+    });
+    expect(onUnlocked).toHaveBeenCalledOnce();
+    expect(mocks.trackImageDownloaded).toHaveBeenCalledOnce();
+  });
 
-  it("shows an actionable message when the portrait cannot be downloaded", async () => {
+  it("downloads immediately when the portrait is already paid", async () => {
+    mocks.createPaymentOrder.mockResolvedValueOnce({
+      paymentId: jobToken,
+      razorpayOrderId: "order_paid",
+      razorpayKeyId: "rzp_live_example",
+      amount: 2900,
+      currency: "INR",
+      displayAmount: "₹29",
+      paid: true,
+    });
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue(new Response(null, { status: 503 })),
+      vi.fn().mockResolvedValue({
+        ok: true,
+        blob: vi
+          .fn()
+          .mockResolvedValue(new Blob([new Uint8Array([1])], { type: "image/jpeg" })),
+      }),
     );
-    render(<PortraitDownloadButton imageUrl={imageUrl} />);
+    render(<PortraitDownloadButton jobToken={jobToken} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Download Portrait" }));
+    fireEvent.click(screen.getByRole("button", { name: "Download HD Portrait" }));
 
-    expect(
-      await screen.findByText("Unable to download the portrait. Please try again."),
-    ).toHaveAttribute("role", "alert");
-    expect(screen.getByRole("button", { name: "Download Portrait" })).toBeEnabled();
-    expect(trackImageDownloaded).not.toHaveBeenCalled();
+    await waitFor(() => expect(downloadedFileName).toMatch(/\.jpg$/));
+    expect(mocks.openRazorpayCheckout).not.toHaveBeenCalled();
+    expect(mocks.verifyPayment).not.toHaveBeenCalled();
+  });
+
+  it("does not request the HD output when checkout is cancelled", async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    mocks.openRazorpayCheckout.mockRejectedValueOnce(
+      new Error("Payment was not completed."),
+    );
+    render(<PortraitDownloadButton jobToken={jobToken} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Download HD Portrait" }));
+
+    expect(await screen.findByText("Payment was not completed.")).toHaveAttribute(
+      "role",
+      "alert",
+    );
+    expect(mocks.verifyPayment).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

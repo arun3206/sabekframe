@@ -1,4 +1,5 @@
 import { formatPrice, pricing } from "@/config/pricing";
+import { getActivePortraitTemplate } from "@/config/portrait-templates";
 import type { PortraitTemplate } from "@/features/portrait-flow/types";
 import { RazorpayClient, type RazorpayApi } from "@/server/payments/razorpay-client";
 import {
@@ -116,6 +117,28 @@ export class PaymentService {
     templateId: PortraitTemplate;
     sessionId: string;
   }): Promise<PublicPaymentOrder> {
+    const template = getActivePortraitTemplate(input.templateId);
+    if (!template)
+      throw new PaymentServiceError(
+        "INVALID_TEMPLATE",
+        "This product is unavailable.",
+        400,
+      );
+    if (template.paymentTiming === "PREVIEW_THEN_PAY") {
+      const generation = await this.storage.getGenerationJob(input.generationJobId);
+      if (
+        !generation ||
+        generation.sessionId !== input.sessionId ||
+        generation.templateId !== input.templateId ||
+        generation.status !== "complete" ||
+        !generation.outputS3Key
+      )
+        throw new PaymentServiceError(
+          "PORTRAIT_NOT_READY",
+          "Your portrait must be ready before checkout can begin.",
+          409,
+        );
+    }
     const terms = paymentTerms();
     const credentials = await this.credentials();
     const current = await this.storage.getPayment(input.generationJobId);

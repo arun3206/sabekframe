@@ -23,6 +23,7 @@ import type {
   PrivateImageStorageProvider,
   UploadRecord,
 } from "@/server/uploads/storage";
+import { createAwsPortraitPreview } from "@/server/uploads/aws-portrait-preview";
 
 const EXPIRY_INDEX = "expiry-index";
 
@@ -205,6 +206,10 @@ export class AwsStorage implements PrivateImageStorageProvider {
       uploadKind: "binary",
       uploadHeaders: { "Content-Type": "image/jpeg" },
     };
+  }
+
+  async createPortraitPreview(outputKey: string, previewKey: string) {
+    return createAwsPortraitPreview(outputKey, previewKey);
   }
 
   async putDevelopmentRaw() {

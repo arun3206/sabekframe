@@ -50,8 +50,9 @@ const steps = [
     description: "Use a clear photo and confirm that you have permission to use it.",
   },
   {
-    title: "Generate and download",
-    description: "Complete the one-time payment and download your finished portrait.",
+    title: "Preview, unlock and download",
+    description:
+      "See a blurred preview first. Pay only when you choose to download the HD portrait.",
   },
 ] as const;
 
@@ -122,7 +123,7 @@ export default function AiPhotoGeneratorPage() {
               </div>
               <ul className={styles.trustList} aria-label="Portrait purchase details">
                 <li>
-                  <Check size={17} aria-hidden="true" /> One-time {price} payment
+                  <Check size={17} aria-hidden="true" /> Preview before paying
                 </li>
                 <li>
                   <Check size={17} aria-hidden="true" /> No account required
@@ -258,7 +259,7 @@ export default function AiPhotoGeneratorPage() {
         <section className={styles.finalCta}>
           <p className={styles.eyebrow}>Your retro portrait starts here</p>
           <h2>Choose a style and turn your photo into a memory</h2>
-          <p>One portrait generation for {price}. No subscription or account required.</p>
+          <p>Preview free, then unlock the HD portrait for {price}. No subscription.</p>
           <Link className={styles.primaryCta} href="/create">
             Create Your AI Portrait <Sparkles size={19} aria-hidden="true" />
           </Link>

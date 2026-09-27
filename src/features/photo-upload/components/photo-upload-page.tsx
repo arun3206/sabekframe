@@ -534,7 +534,7 @@ export function PhotoUploadPage({
       requestId,
       templateId: template,
       photos,
-      phase: "PREPARING_PAYMENT",
+      phase: "GENERATING",
       autoStart: true,
     });
     trackGenerateClicked(selectedTemplate);
@@ -770,7 +770,7 @@ export function PhotoUploadPage({
         <aside className={styles.purchaseNote} aria-label="Launch price">
           <strong>{formatPrice(pricing.offer.amountMinor)}</strong>
           <span>{pricing.offer.label}</span>
-          <p>One payment includes one AI-generated portrait.</p>
+          <p>Generate your preview first. Pay only to download the HD portrait.</p>
           <small>Secure checkout powered by Razorpay.</small>
         </aside>
 

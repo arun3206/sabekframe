@@ -18,6 +18,13 @@
   height: 1.25rem;
 }
 
+.paymentNote {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
 .spinner {
   animation: spin 0.9s linear infinite;
 }

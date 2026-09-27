@@ -11,6 +11,7 @@ interface BasePortraitTemplateConfiguration {
   visibleInSelector: boolean;
   description: string;
   sortOrder: number;
+  paymentTiming: "PREVIEW_THEN_PAY" | "PAY_THEN_GENERATE";
   selectorSection?: "TRENDING" | "FESTIVAL";
   masterFilePath?: string;
   contentType?: "image/jpeg" | "image/png" | "image/webp";
@@ -73,6 +74,7 @@ export const rakhiBrotherSisterTemplate = {
   visibleInSelector: false,
   description: "A traditional Raksha Bandhan portrait for a brother and sister.",
   sortOrder: 2,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/brother-sister/brother-sister101.png",
   contentType: "image/png",
   s3Key: "templates/raksha-bandhan/rakhi-brother-sister-traditional-001/template.png",
@@ -109,6 +111,7 @@ export const janmashtamiKrishnaMakhanTemplate = {
   description:
     "A warm, photorealistic Little Krishna portrait with makhan matki and flute.",
   sortOrder: 1,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/janmashtami/janmashtami-krishna-makhan-001/template.png",
   contentType: "image/png",
   s3Key: "templates/janmashtami/janmashtami-krishna-makhan-001/template.png",
@@ -170,6 +173,7 @@ export const janmashtamiRadhaKrishnaCoupleTemplate = {
   visibleInSelector: true,
   description: "A lush Radha Krishna-inspired portrait in blue and gold.",
   sortOrder: 2,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/janmashtami/radha-krishna-couple-001/template.webp",
   contentType: "image/webp",
   s3Key: "templates/janmashtami/radha-krishna-couple-001/template.webp",
@@ -192,6 +196,7 @@ export const janmashtamiLittleKrishnaTemplate = {
   visibleInSelector: true,
   description: "A bright Little Krishna portrait beside a decorated matki.",
   sortOrder: 1,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/janmashtami/janmashtami-little-krishna-001/template.webp",
   contentType: "image/webp",
   s3Key: "templates/janmashtami/janmashtami-little-krishna-001/template.webp",
@@ -214,6 +219,7 @@ export const janmashtamiWishFluteTemplate = {
   visibleInSelector: true,
   description: "A blue festive greeting portrait with flute and blessings.",
   sortOrder: 3,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/janmashtami/janmashtami-wish-flute-001/template.webp",
   contentType: "image/webp",
   s3Key: "templates/janmashtami/janmashtami-wish-flute-001/template.webp",
@@ -236,6 +242,7 @@ export const janmashtamiWishPortraitTemplate = {
   visibleInSelector: true,
   description: "A framed Janmashtami wish portrait with flute and matki.",
   sortOrder: 4,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/janmashtami/janmashtami-wish-portrait-001/template.webp",
   contentType: "image/webp",
   s3Key: "templates/janmashtami/janmashtami-wish-portrait-001/template.webp",
@@ -269,6 +276,7 @@ export const janmashtamiMotherDaughterRadhaTemplate = {
   visibleInSelector: true,
   description: "Create a festive Radha portrait from one mother-daughter photo.",
   sortOrder: 5,
+  paymentTiming: "PREVIEW_THEN_PAY",
   masterFilePath: "templates/janmashtami/mother-daughter-radha-001/template.jpeg",
   contentType: "image/jpeg",
   s3Key: "templates/janmashtami/mother-daughter-radha-001/template.jpeg",
@@ -293,6 +301,7 @@ export const retroPortraitTemplates: readonly OpenAiPortraitTemplateConfiguratio
     selectorSection: "TRENDING",
     active: true,
     visibleInSelector: true,
+    paymentTiming: "PREVIEW_THEN_PAY",
     outputSize: "1024x1536",
     outputQuality: "medium",
   }));

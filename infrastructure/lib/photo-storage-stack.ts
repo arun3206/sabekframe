@@ -207,6 +207,12 @@ export class PhotoStorageStack extends Stack {
     );
     finalizeFunction.addToRolePolicy(
       new iam.PolicyStatement({
+        actions: ["s3:GetObject", "s3:PutObject"],
+        resources: [`${sanitizedUploads.bucketArn}/outputs/*`],
+      }),
+    );
+    finalizeFunction.addToRolePolicy(
+      new iam.PolicyStatement({
         actions: [
           "dynamodb:GetItem",
           "dynamodb:PutItem",

@@ -40,19 +40,21 @@ export async function POST(request: Request) {
         "Unknown or inactive templateId.",
         400,
       );
-    const payment = await getPrivateImageStorage().getPayment(parsed.data.requestId);
-    if (
-      !isPaidForGeneration(payment, {
-        sessionId,
-        generationJobId: parsed.data.requestId,
-        templateId: template.id,
-      })
-    )
-      return generationApiError(
-        "PAYMENT_REQUIRED",
-        `Please complete the ${formatPrice(pricing.offer.amountMinor)} payment before generating your portrait.`,
-        402,
-      );
+    if (template.paymentTiming === "PAY_THEN_GENERATE") {
+      const payment = await getPrivateImageStorage().getPayment(parsed.data.requestId);
+      if (
+        !isPaidForGeneration(payment, {
+          sessionId,
+          generationJobId: parsed.data.requestId,
+          templateId: template.id,
+        })
+      )
+        return generationApiError(
+          "PAYMENT_REQUIRED",
+          `Please complete the ${formatPrice(pricing.offer.amountMinor)} payment before generating this product.`,
+          402,
+        );
+    }
     const job =
       template.provider === "OPENAI"
         ? (template.identityMode === "RETRO_SINGLE" ||

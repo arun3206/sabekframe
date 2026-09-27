@@ -8,6 +8,25 @@ import { processRazorpayWebhook } from "@/server/payments/razorpay-webhook";
 const sessionId = "a6ef41b0-ac1e-48ca-a048-c09af0526ef1";
 const secret = "test_secret_value";
 
+function seedCompletedPortrait(storage: InMemoryStorage, generationJobId: string) {
+  const now = Date.now();
+  void storage.createGenerationJob({
+    jobId: generationJobId,
+    jobToken: generationJobId,
+    sessionId,
+    templateId: janmashtamiKrishnaMakhanTemplate.id,
+    childAssetId: crypto.randomUUID(),
+    status: "complete",
+    outputS3Key: `outputs/${generationJobId}/final.png`,
+    outputContentType: "image/png",
+    previewS3Key: `outputs/${generationJobId}/preview.jpg`,
+    previewContentType: "image/jpeg",
+    createdAt: now,
+    updatedAt: now,
+    expiresAt: now + 60_000,
+  });
+}
+
 async function hmac(orderId: string, paymentId: string) {
   const key = await crypto.subtle.importKey(
     "raw",
@@ -29,6 +48,7 @@ async function hmac(orderId: string, paymentId: string) {
 function setup() {
   const generationJobId = crypto.randomUUID();
   const storage = new InMemoryStorage();
+  seedCompletedPortrait(storage, generationJobId);
   const razorpay = {
     createOrder: vi.fn(async (input: { amount: number; currency: "INR" }) => ({
       id: `order_${generationJobId}`,
@@ -69,6 +89,29 @@ describe("Razorpay payments", () => {
         amount: 1,
       }).success,
     ).toBe(false);
+  });
+
+  it("does not create a payment order before the portrait is ready", async () => {
+    const generationJobId = crypto.randomUUID();
+    const storage = new InMemoryStorage();
+    const service = new PaymentService({
+      storage,
+      razorpay: {
+        createOrder: vi.fn(),
+        fetchPayment: vi.fn(),
+        fetchOrder: vi.fn(),
+      },
+      keyId: "rzp_test_example",
+      keySecret: secret,
+    });
+
+    await expect(
+      service.createOrder({
+        generationJobId,
+        templateId: janmashtamiKrishnaMakhanTemplate.id,
+        sessionId,
+      }),
+    ).rejects.toMatchObject({ code: "PORTRAIT_NOT_READY" });
   });
   it("creates and persists an INR 2900 order from server pricing", async () => {
     const { generationJobId, storage, razorpay, service } = setup();
@@ -156,7 +199,7 @@ describe("Razorpay payments", () => {
     ).toBe(false);
   });
 
-  it("does not unlock generation until Razorpay confirms capture", async () => {
+  it("does not unlock the HD download until Razorpay confirms capture", async () => {
     const { generationJobId, storage, razorpay, service } = setup();
     const order = await service.createOrder({
       generationJobId,
@@ -188,6 +231,7 @@ describe("Razorpay payments", () => {
   it("supports live-mode credentials when LIVE is explicitly selected", async () => {
     const generationJobId = crypto.randomUUID();
     const storage = new InMemoryStorage();
+    seedCompletedPortrait(storage, generationJobId);
     const razorpay = {
       createOrder: vi.fn(async () => ({
         id: `order_${generationJobId}`,

@@ -78,8 +78,9 @@ $env:AWS_SESSION_TOKEN = $awsSession.SessionToken
 ## Production
 
 The production stack is deployed in AWS account `867982505694`, Mumbai (`ap-south-1`).
-Its S3 CORS configuration allows `https://cherishkit.com`, `https://www.cherishkit.com`,
-and the Cloudflare `workers.dev` fallback. Review and update it with:
+Its S3 CORS configuration allows `https://sabekframe.com`, `https://www.sabekframe.com`,
+the Cloudflare `workers.dev` fallback, and the retained CherishKit origins. Review and
+update it with:
 
 ```powershell
 $env:AWS_PROFILE = "arun-admin"

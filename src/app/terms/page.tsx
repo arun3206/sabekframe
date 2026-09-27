@@ -20,9 +20,8 @@ export default function TermsPage() {
       <section>
         <h2>The service</h2>
         <p>
-          Yaadon creates AI-generated family and festival portraits using photographs you
-          provide and templates you select. The service is digital and does not include a
-          physical product.
+          Yaadon creates digital AI-generated family and festival portraits using
+          photographs you provide and templates you select. Nothing is physically shipped.
         </p>
       </section>
       <section>
@@ -36,18 +35,24 @@ export default function TermsPage() {
         </p>
       </section>
       <section>
-        <h2>Price and one-generation purchase</h2>
+        <h2>Price and HD portrait purchase</h2>
         <div className="price-card">
           <strong>{price}</strong>
           <span>{pricing.offer.label}</span>
           <p>{pricing.offer.description}</p>
         </div>
         <p>
-          Each {price} purchase covers one AI portrait generation. Because AI results can
-          vary, a successful generation is considered delivery of that purchase. A request
-          for a different artistic result or an additional generation may require a new
-          purchase. Payments are processed securely through Razorpay. Generation begins
-          only after the server verifies that the payment was captured.
+          For current image products, Yaadon creates a protected preview before asking for
+          payment. Selecting Download HD Portrait opens Razorpay Checkout. Each successful
+          {price} purchase unlocks the downloadable HD version of that preview. Payments
+          are processed through Razorpay and access is granted only after our server
+          verifies that the payment was captured.
+        </p>
+        <p>
+          A future product, such as an AI video, may require payment before generation
+          because of its processing cost. When that applies, the product screen and
+          checkout flow will clearly show it before you pay. A verified payment will
+          authorize one generation of the selected product.
         </p>
       </section>
       <section>
@@ -63,10 +68,11 @@ export default function TermsPage() {
       <section>
         <h2>Technical failures</h2>
         <p>
-          If a payment is captured but generation fails, no portrait is delivered, or a
-          confirmed provider or server problem prevents delivery, support may provide a
-          regeneration or refund after verification. You will not be required to buy the
-          same generation again solely because our system failed technically. See the
+          If payment is captured but the purchased HD file cannot be delivered, or if a
+          payment-first product cannot be generated because of a confirmed provider or
+          server problem, support may provide delivery, regeneration, or a refund after
+          verification. You will not be required to buy the same product again solely
+          because our system failed technically. See the
           <Link href="/refund-policy"> Refund & Cancellation Policy</Link>.
         </p>
       </section>

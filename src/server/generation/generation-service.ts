@@ -85,7 +85,7 @@ function toPublicJob(job: GenerationJobRecord): PublicGenerationJob {
     status: job.status,
     errorMessage: job.errorMessage,
     outputUrl:
-      job.status === "complete" ? `/api/generations/${job.jobToken}/output` : undefined,
+      job.status === "complete" ? `/api/generations/${job.jobToken}/preview` : undefined,
   };
 }
 
@@ -328,12 +328,16 @@ export class GenerationService {
       const output = await this.downloadOutput(download.url);
       const outputS3Key = `outputs/${job.jobId}/final.${output.extension}`;
       await this.storage.putPrivateObject(outputS3Key, output.bytes, output.contentType);
+      const previewS3Key = `outputs/${job.jobId}/preview.jpg`;
+      const preview = await this.storage.createPortraitPreview(outputS3Key, previewS3Key);
       const complete: GenerationJobRecord = {
         ...job,
         status: "complete",
         creditsCharged: project.credits_charged,
         outputS3Key,
         outputContentType: output.contentType,
+        previewS3Key,
+        previewContentType: preview.contentType,
         updatedAt: this.now(),
       };
       await this.storage.saveGenerationJob(complete);

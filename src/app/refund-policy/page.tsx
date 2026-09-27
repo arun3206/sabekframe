@@ -17,29 +17,41 @@ export default function RefundPolicyPage() {
       intro="This policy separates a request for a different creative result from a genuine payment, provider, or delivery failure."
     >
       <section>
-        <h2>Before generation begins</h2>
+        <h2>Before payment</h2>
         <p>
-          A cancellation requested before generation begins may be reviewed according to
-          the payment’s actual status and technical capability. We do not promise that an
-          authorized or captured payment, or an in-progress generation, can be cancelled.
+          Current image portraits show a protected preview before checkout. You may leave
+          without paying if you do not want to unlock its HD version. Because no payment
+          has been made at that stage, no cancellation or refund is required.
         </p>
       </section>
       <section>
-        <h2>Successful AI generation</h2>
+        <h2>Purchased digital product</h2>
         <p>
-          A completed AI portrait generation is a digitally delivered service. AI results
-          naturally vary, so a portrait that was successfully generated and delivered is
-          generally not refundable solely because you would prefer another expression,
-          pose, style, artistic interpretation, or generated version. A different or
-          additional generation may require a new purchase.
+          Once payment is captured and the purchased HD portrait is made available, the
+          digital product is considered delivered. A delivered portrait is generally not
+          refundable solely because you would prefer another expression, pose, style,
+          artistic interpretation, or generated version. A different or additional
+          generation may require a new purchase.
+        </p>
+      </section>
+      <section>
+        <h2>Payment-first products</h2>
+        <p>
+          A future product such as AI video may require payment before generation. If a
+          verified provider or system failure prevents that paid product from being
+          generated or delivered, we may provide another generation or a refund after
+          checking the transaction and generation record.
         </p>
       </section>
       <section>
         <h2>Genuine technical or billing failures</h2>
-        <p>After verification, we may offer a regeneration or refund when:</p>
+        <p>
+          After verification, we may offer delivery assistance, regeneration, or a refund
+          when:
+        </p>
         <ul>
-          <li>payment was captured but generation never completed;</li>
-          <li>a system or provider failure prevented delivery of the portrait;</li>
+          <li>payment was captured but the purchased HD file was not made available;</li>
+          <li>a payment-first product could not be generated or delivered;</li>
           <li>the same customer was charged more than once for the same purchase; or</li>
           <li>another verified billing or technical issue occurred.</li>
         </ul>

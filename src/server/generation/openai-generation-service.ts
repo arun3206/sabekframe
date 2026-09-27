@@ -63,7 +63,7 @@ function toPublicJob(job: GenerationJobRecord): PublicGenerationJob {
     status: job.status,
     errorMessage: job.errorMessage,
     outputUrl:
-      job.status === "complete" ? `/api/generations/${job.jobToken}/output` : undefined,
+      job.status === "complete" ? `/api/generations/${job.jobToken}/preview` : undefined,
   };
 }
 
@@ -371,6 +371,8 @@ export class OpenAiGenerationService {
       });
       const outputS3Key = `outputs/${job.jobId}/final.png`;
       await this.storage.putPrivateObject(outputS3Key, result.bytes, result.contentType);
+      const previewS3Key = `outputs/${job.jobId}/preview.jpg`;
+      const preview = await this.storage.createPortraitPreview(outputS3Key, previewS3Key);
       const completedAt = this.now();
       const complete: GenerationJobRecord = {
         ...processing,
@@ -378,6 +380,8 @@ export class OpenAiGenerationService {
         model: result.model,
         outputS3Key,
         outputContentType: result.contentType,
+        previewS3Key,
+        previewContentType: preview.contentType,
         completedAt,
         updatedAt: completedAt,
       };

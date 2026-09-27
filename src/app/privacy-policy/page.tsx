@@ -26,10 +26,10 @@ export default function PrivacyPolicyPage() {
           <li>information you send when asking for support, deletion, or a refund.</li>
         </ul>
         <p>
-          When payments are introduced, we may also receive transaction identifiers and
-          payment status from the payment provider. Complete card details, CVV, UPI PIN,
-          and similar payment credentials will be handled by the payment provider rather
-          than stored directly by Yaadon.
+          When you make a payment, we may also receive transaction identifiers and payment
+          status from the payment provider. Complete card details, CVV, UPI PIN, and
+          similar payment credentials will be handled by the payment provider rather than
+          stored directly by Yaadon.
         </p>
       </section>
 

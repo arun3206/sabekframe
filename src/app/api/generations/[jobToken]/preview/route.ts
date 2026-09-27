@@ -25,26 +25,28 @@ export async function GET(
     if (job.status !== "complete" || !job.outputS3Key)
       return generationApiError("NOT_FOUND", "This portrait is not ready yet.", 404);
     const storage = getPrivateImageStorage();
-    const payment = await storage.getPayment(job.jobId);
-    if (
-      !isPaidForGeneration(payment, {
-        sessionId,
-        generationJobId: job.jobId,
-        templateId: job.templateId,
-      })
-    )
-      return generationApiError(
-        "PAYMENT_REQUIRED",
-        "Complete payment to download your HD portrait.",
-        402,
-      );
-    const signedUrl = await storage.createPrivateObjectUrl(job.outputS3Key, 5 * 60);
+    let previewKey = job.previewS3Key;
+    let previewContentType = job.previewContentType;
+    if (!previewKey) {
+      const payment = await storage.getPayment(job.jobId);
+      if (
+        !isPaidForGeneration(payment, {
+          sessionId,
+          generationJobId: job.jobId,
+          templateId: job.templateId,
+        })
+      )
+        return generationApiError("NOT_FOUND", "This portrait preview has expired.", 404);
+      previewKey = job.outputS3Key;
+      previewContentType = job.outputContentType;
+    }
+    const signedUrl = await storage.createPrivateObjectUrl(previewKey, 5 * 60);
     if (signedUrl) return Response.redirect(signedUrl, 307);
-    const bytes = await storage.readPrivateObject(job.outputS3Key);
+    const bytes = await storage.readPrivateObject(previewKey);
     if (!bytes) return generationApiError("NOT_FOUND", "This portrait has expired.", 404);
     return new Response(bytes.slice().buffer, {
       headers: {
-        "Content-Type": job.outputContentType ?? "image/png",
+        "Content-Type": previewContentType ?? "image/jpeg",
         "Cache-Control": "private, no-store",
       },
     });
@@ -53,7 +55,7 @@ export async function GET(
       return generationApiError(error.code, error.message, error.httpStatus);
     return generationApiError(
       "STORAGE_UNAVAILABLE",
-      "This portrait is unavailable.",
+      "The portrait preview is temporarily unavailable.",
       503,
     );
   }

@@ -33,16 +33,22 @@ import {
 } from "@/lib/analytics";
 import styles from "./generation-progress.module.css";
 
-type ExperiencePhase = PendingGenerationIntent["phase"] | "POLLING";
+type ExperiencePhase =
+  | "PREPARING_PAYMENT"
+  | "PAYMENT_OPEN"
+  | "PAYMENT_VERIFICATION"
+  | "GENERATING"
+  | "POLLING"
+  | "FAILED";
 
 const phaseCopy: Record<
   Exclude<ExperiencePhase, "FAILED">,
   { eyebrow: string; title: string; message: string }
 > = {
   PREPARING_PAYMENT: {
-    eyebrow: "Creating your memory",
-    title: "Creating your special moment…",
-    message: "Preparing your portrait experience",
+    eyebrow: "Secure payment",
+    title: "Preparing secure checkout…",
+    message: "This product is generated after payment.",
   },
   PAYMENT_OPEN: {
     eyebrow: "Secure payment",
@@ -57,12 +63,12 @@ const phaseCopy: Record<
   GENERATING: {
     eyebrow: "Creating your memory",
     title: "Creating your special moment…",
-    message: "This may take a little while.",
+    message: "Your portrait preview is being prepared. No payment is needed yet.",
   },
   POLLING: {
     eyebrow: "Creating your memory",
     title: "Creating your special moment…",
-    message: "This may take a little while.",
+    message: "This may take a little while. No payment is needed yet.",
   },
 };
 
@@ -70,9 +76,9 @@ export function GenerationProgress({ jobToken }: { jobToken: string }) {
   const router = useRouter();
   const running = useRef(false);
   const [attempt, setAttempt] = useState(0);
-  const [phase, setPhase] = useState<ExperiencePhase>("PREPARING_PAYMENT");
-  const [message, setMessage] = useState(phaseCopy.PREPARING_PAYMENT.message);
-  const [failureKind, setFailureKind] = useState<"PAYMENT" | "GENERATION" | null>(null);
+  const [phase, setPhase] = useState<ExperiencePhase>("GENERATING");
+  const [message, setMessage] = useState(phaseCopy.GENERATING.message);
+  const [failureKind, setFailureKind] = useState<"PAYMENT" | "GENERATION">("GENERATION");
 
   useEffect(() => {
     if (running.current) return;
@@ -81,7 +87,6 @@ export function GenerationProgress({ jobToken }: { jobToken: string }) {
 
     const showPhase = (nextPhase: Exclude<ExperiencePhase, "FAILED">) => {
       if (!active) return;
-      setFailureKind(null);
       setPhase(nextPhase);
       setMessage(phaseCopy[nextPhase].message);
     };
@@ -89,6 +94,23 @@ export function GenerationProgress({ jobToken }: { jobToken: string }) {
     const finish = (resultToken: string) => {
       clearPendingGenerationIntent(window.localStorage);
       router.replace(`/result/${encodeURIComponent(resultToken)}`);
+    };
+
+    const fail = (
+      error: unknown,
+      kind: "PAYMENT" | "GENERATION",
+      templateId?: string,
+    ) => {
+      if (!active) return;
+      const analyticsTemplate = templateId ? getActivePortraitTemplate(templateId) : null;
+      if (kind === "GENERATION" && analyticsTemplate)
+        trackGenerationFailed(analyticsTemplate, normalizeGenerationError(error));
+      running.current = false;
+      setFailureKind(kind);
+      setPhase("FAILED");
+      setMessage(
+        error instanceof Error ? error.message : "We couldn’t finish this portrait.",
+      );
     };
 
     const poll = async (templateId?: string) => {
@@ -108,151 +130,115 @@ export function GenerationProgress({ jobToken }: { jobToken: string }) {
         showPhase("POLLING");
         timeout = setTimeout(() => void poll(templateId), 3_000);
       } catch (error) {
-        if (!active) return;
-        if (analyticsTemplate)
-          trackGenerationFailed(analyticsTemplate, normalizeGenerationError(error));
-        running.current = false;
-        setFailureKind("GENERATION");
-        setPhase("FAILED");
-        setMessage(
-          error instanceof Error ? error.message : "We couldn’t finish this portrait.",
-        );
+        const storedIntent = readPendingGenerationIntent(window.localStorage);
+        if (storedIntent?.requestId === jobToken)
+          updatePendingGenerationIntent(window.localStorage, storedIntent, {
+            phase: "FAILED",
+            autoStart: false,
+            failureKind: "GENERATION",
+          });
+        fail(error, "GENERATION", analyticsTemplate?.id);
       }
     };
 
     const generate = async (intent: PendingGenerationIntent) => {
+      const updated = updatePendingGenerationIntent(window.localStorage, intent, {
+        phase: "GENERATING",
+        autoStart: false,
+        failureKind: undefined,
+      });
       showPhase("GENERATING");
-      const job = await startGeneration(toStartGenerationInput(intent));
-      if (!active) return;
-      if (job.status === "complete") {
-        finish(job.jobToken);
-        const analyticsTemplate = getActivePortraitTemplate(intent.templateId);
-        if (analyticsTemplate) trackGenerationCompleted(analyticsTemplate, job.jobToken);
-        return;
+      try {
+        const job = await startGeneration(toStartGenerationInput(updated));
+        if (!active) return;
+        if (job.status === "complete") {
+          finish(job.jobToken);
+          const analyticsTemplate = getActivePortraitTemplate(updated.templateId);
+          if (analyticsTemplate)
+            trackGenerationCompleted(analyticsTemplate, job.jobToken);
+          return;
+        }
+        if (job.status === "failed")
+          throw new Error(job.errorMessage ?? "We couldn’t finish this portrait.");
+        await poll(updated.templateId);
+      } catch (error) {
+        updatePendingGenerationIntent(window.localStorage, updated, {
+          phase: "FAILED",
+          autoStart: false,
+          failureKind: "GENERATION",
+        });
+        fail(error, "GENERATION", updated.templateId);
       }
-      if (job.status === "failed")
-        throw new Error(job.errorMessage ?? "We couldn’t finish this portrait.");
-      await poll(intent.templateId);
     };
 
-    const payAndGenerate = async (initialIntent: PendingGenerationIntent) => {
-      let intent = updatePendingGenerationIntent(window.localStorage, initialIntent, {
+    const payThenGenerate = async (intent: PendingGenerationIntent) => {
+      let updated = updatePendingGenerationIntent(window.localStorage, intent, {
         phase: "PREPARING_PAYMENT",
         autoStart: false,
         failureKind: undefined,
       });
       showPhase("PREPARING_PAYMENT");
       try {
-        const order = await createPaymentOrder(intent.requestId, intent.templateId);
+        const order = await createPaymentOrder(updated.requestId, updated.templateId);
         if (!active) return;
-        const analyticsTemplate = getActivePortraitTemplate(intent.templateId);
-        const paymentAnalytics = analyticsTemplate
-          ? {
-              currency: order.currency,
-              value: order.amount / 100,
-              template: analyticsTemplate,
-            }
+        const template = getActivePortraitTemplate(updated.templateId);
+        const paymentAnalytics = template
+          ? { currency: order.currency, value: order.amount / 100, template }
           : null;
-        if (order.paid) {
-          intent = updatePendingGenerationIntent(window.localStorage, intent, {
-            phase: "GENERATING",
+        if (!order.paid) {
+          updated = updatePendingGenerationIntent(window.localStorage, updated, {
+            phase: "PAYMENT_OPEN",
           });
-          if (paymentAnalytics) trackPurchase(order.razorpayOrderId, paymentAnalytics);
-          await generate(intent);
-          return;
+          showPhase("PAYMENT_OPEN");
+          const checkoutResult = await openRazorpayCheckout(order, () => {
+            if (paymentAnalytics) trackCheckoutStarted(paymentAnalytics);
+          });
+          if (!active) return;
+          updated = updatePendingGenerationIntent(window.localStorage, updated, {
+            phase: "PAYMENT_VERIFICATION",
+          });
+          showPhase("PAYMENT_VERIFICATION");
+          await verifyPayment(order.paymentId, checkoutResult);
+          if (!active) return;
+          if (paymentAnalytics)
+            trackPurchase(checkoutResult.razorpay_order_id, paymentAnalytics);
         }
-        intent = updatePendingGenerationIntent(window.localStorage, intent, {
-          phase: "PAYMENT_OPEN",
-        });
-        showPhase("PAYMENT_OPEN");
-        const checkoutResult = await openRazorpayCheckout(order, () => {
-          if (paymentAnalytics) trackCheckoutStarted(paymentAnalytics);
-        });
-        if (!active) return;
-        intent = updatePendingGenerationIntent(window.localStorage, intent, {
-          phase: "PAYMENT_VERIFICATION",
-        });
-        showPhase("PAYMENT_VERIFICATION");
-        await verifyPayment(order.paymentId, checkoutResult);
-        if (!active) return;
-        intent = updatePendingGenerationIntent(window.localStorage, intent, {
-          phase: "GENERATING",
-        });
-        if (paymentAnalytics)
-          trackPurchase(checkoutResult.razorpay_order_id, paymentAnalytics);
-        await generate(intent);
+        await generate(updated);
       } catch (error) {
-        if (!active) return;
-        const kind = intent.phase === "GENERATING" ? "GENERATION" : "PAYMENT";
-        const analyticsTemplate = getActivePortraitTemplate(intent.templateId);
-        if (kind === "GENERATION" && analyticsTemplate)
-          trackGenerationFailed(analyticsTemplate, normalizeGenerationError(error));
-        updatePendingGenerationIntent(window.localStorage, intent, {
+        const kind = updated.phase === "GENERATING" ? "GENERATION" : "PAYMENT";
+        updatePendingGenerationIntent(window.localStorage, updated, {
           phase: "FAILED",
           autoStart: false,
           failureKind: kind,
         });
-        running.current = false;
-        setFailureKind(kind);
-        setPhase("FAILED");
-        setMessage(
-          error instanceof Error
-            ? error.message
-            : kind === "PAYMENT"
-              ? "We couldn’t complete your payment."
-              : "We couldn’t finish this portrait.",
-        );
+        fail(error, kind, updated.templateId);
       }
     };
 
     const intent = readPendingGenerationIntent(window.localStorage);
-    if (intent?.requestId === jobToken) {
-      if (intent.phase === "GENERATING") {
-        timeout = setTimeout(() => {
-          if (!active) return;
-          running.current = true;
-          void generate(intent).catch((error: unknown) => {
-            if (!active) return;
-            updatePendingGenerationIntent(window.localStorage, intent, {
-              phase: "FAILED",
-              failureKind: "GENERATION",
-            });
-            const analyticsTemplate = getActivePortraitTemplate(intent.templateId);
-            if (analyticsTemplate)
-              trackGenerationFailed(analyticsTemplate, normalizeGenerationError(error));
-            running.current = false;
-            setFailureKind("GENERATION");
-            setPhase("FAILED");
-            setMessage(
-              error instanceof Error
-                ? error.message
-                : "We couldn’t finish this portrait.",
-            );
-          });
-        }, 0);
-      } else if (intent.autoStart || attempt > 0) {
-        timeout = setTimeout(() => {
-          if (!active) return;
-          running.current = true;
-          void payAndGenerate(intent);
-        }, 0);
-      } else {
-        setFailureKind(intent.failureKind ?? "PAYMENT");
-        setPhase("FAILED");
-        setMessage(
-          intent.failureKind === "GENERATION"
-            ? "We couldn’t finish this portrait."
-            : "Payment was not completed.",
-        );
+    timeout = setTimeout(() => {
+      if (!active) return;
+      running.current = true;
+      if (intent?.requestId === jobToken) {
+        if (intent.phase === "FAILED" && attempt === 0) {
+          running.current = false;
+          setFailureKind(intent.failureKind ?? "GENERATION");
+          setPhase("FAILED");
+          setMessage(
+            intent.failureKind === "PAYMENT"
+              ? "Payment was not completed."
+              : "We couldn’t finish this portrait.",
+          );
+          return;
+        }
+        const template = getActivePortraitTemplate(intent.templateId);
+        if (template?.paymentTiming === "PAY_THEN_GENERATE") void payThenGenerate(intent);
+        else void generate(intent);
+        return;
       }
-    } else {
       showPhase("POLLING");
-      timeout = setTimeout(() => {
-        if (!active) return;
-        running.current = true;
-        void poll();
-      }, 0);
-    }
+      void poll();
+    }, 0);
 
     return () => {
       active = false;
@@ -263,13 +249,9 @@ export function GenerationProgress({ jobToken }: { jobToken: string }) {
 
   const failed = phase === "FAILED";
   const copy = failed
-    ? {
-        eyebrow: failureKind === "PAYMENT" ? "Payment paused" : "Generation paused",
-        title:
-          failureKind === "PAYMENT"
-            ? "Payment was not completed"
-            : "We couldn’t finish this portrait",
-      }
+    ? failureKind === "PAYMENT"
+      ? { eyebrow: "Payment paused", title: "Payment was not completed" }
+      : { eyebrow: "Generation paused", title: "We couldn’t finish this portrait" }
     : phaseCopy[phase];
 
   return (
@@ -299,7 +281,7 @@ export function GenerationProgress({ jobToken }: { jobToken: string }) {
               </Link>
             </div>
           ) : (
-            <small>You can keep this page open while we prepare your portrait.</small>
+            <small>You can keep this page open while we prepare your preview.</small>
           )}
         </Card>
       </MobilePageContainer>

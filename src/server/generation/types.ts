@@ -43,6 +43,8 @@ export interface GenerationJobRecord {
   creditsCharged?: number;
   outputS3Key?: string;
   outputContentType?: string;
+  previewS3Key?: string;
+  previewContentType?: string;
   errorMessage?: string;
   completedAt?: number;
   createdAt: number;

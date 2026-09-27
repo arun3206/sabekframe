@@ -59,6 +59,10 @@ export interface PrivateImageStorageProvider {
   ): Promise<boolean>;
   deletePrivateObject(key: string): Promise<void>;
   createPrivateObjectUrl(key: string, expiresIn: number): Promise<string | null>;
+  createPortraitPreview(
+    outputKey: string,
+    previewKey: string,
+  ): Promise<{ contentType: string }>;
   createAssetProviderUrl(record: AssetRecord, expiresIn: number): Promise<string>;
   createGenerationJob(record: GenerationJobRecord): Promise<boolean>;
   restartFailedGenerationJob(record: GenerationJobRecord): Promise<boolean>;
@@ -190,6 +194,16 @@ export class InMemoryStorage implements PrivateImageStorageProvider {
     void _key;
     void _expiresIn;
     return null;
+  }
+
+  async createPortraitPreview(outputKey: string, previewKey: string) {
+    const source = memory.privateObjects.get(outputKey);
+    if (!source) throw new Error("Portrait output missing");
+    memory.privateObjects.set(previewKey, {
+      bytes: source.bytes,
+      contentType: source.contentType,
+    });
+    return { contentType: source.contentType };
   }
 
   async createAssetProviderUrl(

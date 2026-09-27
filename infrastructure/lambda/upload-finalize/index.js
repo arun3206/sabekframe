@@ -28,6 +28,7 @@ const MAX_PIXELS = 40_000_000;
 const MAX_SIDE = 2048;
 const MIN_SIDE = 512;
 const ASSET_RETENTION_MS = 24 * 60 * 60 * 1000;
+const MAX_PORTRAIT_BYTES = 25 * 1024 * 1024;
 
 function failure(code, message, status) {
   return { ok: false, error: { code, message, status } };
@@ -62,6 +63,52 @@ function validInput(input) {
       input.clientQualityStatus === "warning-accepted") &&
     (input.faceBoundingBox === null || validBox(input.faceBoundingBox))
   );
+}
+
+function validPortraitPreviewInput(input) {
+  if (!input || input.operation !== "create-portrait-preview") return false;
+  const output = /^outputs\/([0-9a-f-]{36})\/final\.(?:png|jpe?g|webp)$/i.exec(
+    input.outputKey || "",
+  );
+  const preview = /^outputs\/([0-9a-f-]{36})\/preview\.jpg$/i.exec(
+    input.previewKey || "",
+  );
+  return Boolean(output && preview && output[1] === preview[1]);
+}
+
+async function createPortraitPreview(input) {
+  try {
+    const object = await s3.send(
+      new GetObjectCommand({ Bucket: sanitizedBucket, Key: input.outputKey }),
+    );
+    if (!object.Body) throw new Error("PORTRAIT_MISSING");
+    const source = await object.Body.transformToByteArray();
+    if (source.byteLength > MAX_PORTRAIT_BYTES) throw new Error("PORTRAIT_TOO_LARGE");
+    const preview = await sharp(source, {
+      limitInputPixels: MAX_PIXELS,
+      failOn: "error",
+    })
+      .rotate()
+      .resize({ width: 420, height: 560, fit: "inside", withoutEnlargement: true })
+      .blur(18)
+      .jpeg({ quality: 55, mozjpeg: true })
+      .toBuffer();
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: sanitizedBucket,
+        Key: input.previewKey,
+        Body: preview,
+        ContentType: "image/jpeg",
+        CacheControl: "private, no-store",
+      }),
+    );
+    return {
+      ok: true,
+      data: { previewKey: input.previewKey, contentType: "image/jpeg" },
+    };
+  } catch {
+    return failure("PREVIEW_FAILED", "The portrait preview could not be prepared.", 500);
+  }
 }
 
 function laplacianVariance(pixels, width, height) {
@@ -137,6 +184,11 @@ async function sanitize(source, suppliedBox) {
 }
 
 export const handler = async (input) => {
+  if (input?.operation === "create-portrait-preview") {
+    if (!validPortraitPreviewInput(input))
+      return failure("INVALID_PREVIEW", "The preview request was invalid.", 422);
+    return createPortraitPreview(input);
+  }
   if (!validInput(input))
     return failure("INVALID_IMAGE", "The photo validation details were invalid.", 422);
 
