@@ -128,9 +128,11 @@ describe("GenerationProgress payment timing", () => {
       razorpay_order_id: "order_test",
       razorpay_signature: "signature",
     });
-    expect(mocks.verifyPayment.mock.invocationCallOrder[0]).toBeLessThan(
-      mocks.startGeneration.mock.invocationCallOrder[0],
-    );
+    const verificationOrder = mocks.verifyPayment.mock.invocationCallOrder[0];
+    const generationOrder = mocks.startGeneration.mock.invocationCallOrder[0];
+    expect(verificationOrder).toBeDefined();
+    expect(generationOrder).toBeDefined();
+    expect(verificationOrder!).toBeLessThan(generationOrder!);
     expect(mocks.trackCheckoutStarted).toHaveBeenCalledOnce();
     expect(mocks.trackPurchase).toHaveBeenCalledOnce();
   });
