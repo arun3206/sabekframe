@@ -23,7 +23,7 @@
     transform 420ms ease;
 }
 .locked img {
-  filter: saturate(0.82) contrast(0.94);
+  filter: none;
   transform: scale(1.02);
 }
 .unlocked img {
@@ -42,6 +42,21 @@
   color: #fff;
   text-shadow: 0 1px 12px rgb(0 0 0 / 75%);
   background: linear-gradient(180deg, transparent 42%, rgb(42 18 22 / 48%));
+}
+.previewLock::before {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: max-content;
+  padding: 0.45rem 0.8rem;
+  border: 2px solid rgb(255 255 255 / 65%);
+  color: rgb(255 255 255 / 78%);
+  font-size: clamp(0.78rem, 3vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 70%);
+  content: "SABEKFRAME PREVIEW";
+  transform: translate(-50%, -50%) rotate(-16deg);
 }
 .previewLock svg {
   width: 2rem;
