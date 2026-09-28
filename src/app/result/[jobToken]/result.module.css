@@ -23,7 +23,7 @@
     transform 420ms ease;
 }
 .locked img {
-  filter: blur(4px);
+  filter: saturate(0.82) contrast(0.94);
   transform: scale(1.02);
 }
 .unlocked img {

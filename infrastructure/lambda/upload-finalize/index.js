@@ -90,7 +90,7 @@ async function createPortraitPreview(input) {
     })
       .rotate()
       .resize({ width: 420, height: 560, fit: "inside", withoutEnlargement: true })
-      .blur(18)
+      .blur(3)
       .jpeg({ quality: 55, mozjpeg: true })
       .toBuffer();
     await s3.send(
